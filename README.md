@@ -15,7 +15,8 @@ An opinionated introduction to using [Docker](https://www.docker.com/) as a soft
 	- [Installation](#installation)
 - [Documentation](#documentation)
 - [Tutorial](#tutorial)
-	- [What is a Docker image?](#what-is-a-docker-image)
+	- [Docker Images](#docker-images)
+	- [Docker Hub](#docker-hub)
 	- [Pulling Images](#pulling-images)
 	- [Running Containers](#running-containers)
 	- [Monitoring Containers](#monitoring-containers)
@@ -44,9 +45,13 @@ The [official Docker documentation and tutorial](https://docs.docker.com/get-sta
 
 A note up front, Docker has very similar syntax to Git and Linux, so if you are familiar with the command line tools for them then most of Docker should seem somewhat natural (though you should still read the docs!).
 
-### What is a Docker image?
+### Docker Images
 
 It is still important to know what Docker _is_ and what the components of it _are_.
+
+### Docker Hub
+
+Much like GitHub allows for web hosting and searching for code, [Docker Hub](https://hub.docker.com/) allows the same for Docker images. Hosting and building of images is [free for public repositories](https://hub.docker.com/billing-plans/) and allows for downloading images as they are needed. Additionally, through integrations with GitHub and Bitbucket, Docker Hub repositories can be linked against Git repositories so that [automated builds of Dockerfiles on Docker Hub](https://docs.docker.com/docker-hub/builds/) will be triggered by pushes to repositories.
 
 ### Pulling Images
 
