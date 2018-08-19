@@ -5,6 +5,8 @@ An opinionated introduction to using [Docker](https://www.docker.com/) as a soft
 > Disclaimer: This is a collection of examples of how you _can_ use Docker as a supporting tool for software development. I make no claim as to if this follows best practices of software engineering. Exploration of uses on your own should be considered mandatory follow-up to reading.
 
 [![License](https://img.shields.io/badge/License-BSD%203--Clause-blue.svg)](https://opensource.org/licenses/BSD-3-Clause)
+[![Docker Automated build](https://img.shields.io/docker/automated/matthewfeickert/intro-to-docker.svg)](https://hub.docker.com/r/matthewfeickert/intro-to-docker/)
+[![Docker Build Status](https://img.shields.io/docker/build/matthewfeickert/intro-to-docker.svg)](https://hub.docker.com/r/matthewfeickert/intro-to-docker/builds/)
 
 ## Table of Contents<!-- TOC depthFrom:1 depthTo:6 withLinks:1 updateOnSave:0 orderedList:0 -->
 
