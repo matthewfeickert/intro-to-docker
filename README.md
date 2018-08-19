@@ -207,14 +207,19 @@ http://localhost:8888/?token=<token>
 
 You now have access to Jupyter running on your Docker container.
 
-### Docker as Software as a Service (Saas)
+### Docker as Containers as a Service (CaaS)
 
-run container, run commands, and [clean up](https://docs.docker.com/engine/reference/run/#clean-up---rm)
+If Docker is run in a [detached](https://docs.docker.com/engine/reference/run/#detached--d) state then the container will exit as soon as it has executed the commands given to it. If the [clean up](https://docs.docker.com/engine/reference/run/#clean-up---rm) option is given as well, then the container will be removed once it exits.
 
 ```
-docker run --rm matthewfeickert/intro-to-docker:latest /bin/bash -c 'ls -l && echo "hello" && python --version'
+docker run --rm matthewfeickert/intro-to-docker:latest /bin/bash -c 'cat /etc/os-release && echo "hello" && python --version'
 ```
-http://containertutorials.com/docker-ml/numpy_jupyter.html
+
+This allows for containers to serve as either full pieces of infrastructure (e.g., [reana](http://reanahub.io/)) or as individual instances that are spun up, used, and spun down (think something somewhat along the lines of AWS Lambda).
+
+### Continuous Integration (CI) and Continuous Deployment (CD)
+
+To be added for a future extension
 
 ## Contributing
 
