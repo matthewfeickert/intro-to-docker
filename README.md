@@ -8,7 +8,8 @@ An opinionated introduction to using [Docker](https://www.docker.com/) as a soft
 [![Docker Automated build](https://img.shields.io/docker/automated/matthewfeickert/intro-to-docker.svg)](https://hub.docker.com/r/matthewfeickert/intro-to-docker/)
 [![Docker Build Status](https://img.shields.io/docker/build/matthewfeickert/intro-to-docker.svg)](https://hub.docker.com/r/matthewfeickert/intro-to-docker/builds/)
 
-## Table of Contents<!-- TOC depthFrom:1 depthTo:6 withLinks:1 updateOnSave:0 orderedList:0 -->
+## Table of Contents
+<!-- TOC depthFrom:1 depthTo:6 withLinks:1 updateOnSave:0 orderedList:0 -->
 
 - [Requirements](#requirements)
 	- [Installation](#installation)
@@ -16,6 +17,12 @@ An opinionated introduction to using [Docker](https://www.docker.com/) as a soft
 - [Tutorial](#tutorial)
 	- [What is a Docker image?](#what-is-a-docker-image)
 	- [Pulling Images](#pulling-images)
+	- [Running Containers](#running-containers)
+	- [Monitoring Containers](#monitoring-containers)
+	- [Exiting and restarting containers](#exiting-and-restarting-containers)
+	- [File I/O with Containers](#file-io-with-containers)
+	- [Running Jupyter from a Docker Container](#running-jupyter-from-a-docker-container)
+	- [Docker as Containers as a Service (CaaS)](#docker-as-containers-as-a-service-caas)
 - [Contributing](#contributing)
 - [Authors](#authors)
 
