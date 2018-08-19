@@ -13,6 +13,7 @@ RUN apt -qq -y upgrade
 RUN apt -qq -y install curl wget vim emacs
 
 RUN pip install --upgrade pip
+RUN pip install --upgrade -q jupyter
 RUN pip install --upgrade -q pipenv
 
 RUN rm -rf /root/*
