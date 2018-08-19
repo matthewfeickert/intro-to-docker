@@ -151,6 +151,44 @@ ls
 
 So this shows us that we can exit Docker containers for arbitrary lengths of time and then return to our working environment inside of them as desired.
 
+> **N.B.:** If you want a container to be [cleaned up](https://docs.docker.com/engine/reference/run/#clean-up---rm) &mdash; that is deleted &mdash; after you exit it then run with the `--rm` option flag
+>
+```
+docker run --rm -it <IMAGE> /bin/bash
+```
+
+### File I/O with Containers
+
+### Running Jupyter from a Docker Container
+
+You can run a Jupyter server from inside of your Docker container. First run a container while [exposing](https://docs.docker.com/engine/reference/run/#expose-incoming-ports) the container's internal port `8888` with the `-p` flag
+
+```
+docker run --rm -it -p 8888:8888 matthewfeickert/intro-to-docker /bin/bash
+```
+
+Then [start a Jupyter server](https://jupyter.readthedocs.io/en/latest/running.html#starting-the-notebook-server) with the server listening on all IPs
+
+```
+jupyter notebook --allow-root --no-browser --ip 0.0.0.0
+```
+
+Finally, copy and paste the following with the generated token from the server as `<token>` into your web browser on your local host machine
+
+```
+http://localhost:8888/?token=<token>
+```
+
+You now have access to Jupyter running on your Docker container.
+
+### Docker as Software as a Service (Saas)
+
+run container, run commands, and [clean up](https://docs.docker.com/engine/reference/run/#clean-up---rm)
+
+```
+docker run --rm matthewfeickert/intro-to-docker:latest /bin/bash -c 'ls -l && echo "hello" && python --version'
+```
+http://containertutorials.com/docker-ml/numpy_jupyter.html
 
 ## Contributing
 
