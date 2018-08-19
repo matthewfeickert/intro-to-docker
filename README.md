@@ -159,6 +159,32 @@ docker run --rm -it <IMAGE> /bin/bash
 
 ### File I/O with Containers
 
+[Copying](https://docs.docker.com/engine/reference/commandline/cp/) files between the local host and Docker containers is possible. On your local host find a file that you want to transfer to the container and then
+
+```
+docker cp <file path> <CONTAINER ID>:/
+```
+
+and then from the container check and modify it in some way
+
+```
+echo "This was written inside Docker" >> example_file.txt
+```
+
+and then on the local host copy the file out of the container
+
+```
+docker cp <CONTAINER ID>:/example_file.txt .
+```
+
+and verify if you want that the file has been modified as you wanted
+
+```
+tail example_file.txt
+```
+
+This I/O allows for Docker images to be used for specific tasks that may be difficult to do with the tools or software installed on only the local host machine. For example, debugging problems with software that arise on cross-platform software, or even just having a specific version of software perform a task (e.g., using Python 2 when you don't want it on your machine, or using a specific release of [TeX Live](https://hub.docker.com/r/matthewfeickert/latex-docker/) when you aren't ready to update your system release).
+
 ### Running Jupyter from a Docker Container
 
 You can run a Jupyter server from inside of your Docker container. First run a container while [exposing](https://docs.docker.com/engine/reference/run/#expose-incoming-ports) the container's internal port `8888` with the `-p` flag
