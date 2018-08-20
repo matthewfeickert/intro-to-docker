@@ -8,11 +8,14 @@ WORKDIR /root
 ENV DEBIAN_FRONTEND noninteractive
 
 # Install general dependencies
-RUN apt -qq -y update
-RUN apt -qq -y upgrade
-RUN apt -qq -y install curl wget vim emacs
+RUN apt-get -qq -y update
+RUN apt-get -qq -y install apt-utils
+RUN apt-get -qq -y update
+RUN apt-get -qq -y upgrade
+RUN apt-get -qq -y install curl wget vim emacs
 
 RUN pip install --upgrade pip
+RUN pip install --upgrade -q jupyter
 RUN pip install --upgrade -q pipenv
 
 RUN rm -rf /root/*
