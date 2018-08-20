@@ -11,9 +11,10 @@ If your Issue matches one of the following cases please use the provided templat
 
 ## Pull Requests
 
-If your PR matches one of the following cases please use the provided template:
-- [Addition of a new feature](https://github.com/matthewfeickert/Intro-to-Docker/pulls/new?template=Feature.md)
-- [Fixing a bug](https://github.com/matthewfeickert/Intro-to-Docker/pulls/new?template=Bug-Fix.md)
+If your PR matches one of the following cases please navigate to the following URL, replacing `<PR BRANCH NAME>` with the name of your PR's branch, to use the provided template:
+- Addition of a new feature: `https://github.com/matthewfeickert/Intro-to-Docker/compare/master...<PR BRANCH NAME>?quick_pull=1&template=Feature.md`
+- Fixing a bug: `https://github.com/matthewfeickert/Intro-to-Docker/compare/master...<PR BRANCH NAME>?quick_pull=1&template=Bug-Fix.md`
+
 
 ### WIP
 
