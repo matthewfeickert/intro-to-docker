@@ -160,7 +160,20 @@ docker start <CONTAINER ID>
 docker attach <CONTAINER ID>
 ```
 
-you also have to rename it again (the handle is removed upon exit). Notice that your entry point this time was at `/` not `/root`, so navigate to `/root` (which is `$HOME`) and then check that your `test.txt` still exists
+<details>
+ <summary>Starting and attaching by name</summary>
+
+You can also start and attach containers by their name
+
+```
+docker start <NAME>
+docker attach <NAME>
+```
+
+</details>
+
+
+Notice that your entry point this time was at `/` not `/root`, so navigate to `/root` (which is `$HOME`) and then check that your `test.txt` still exists
 
 ```
 cd
