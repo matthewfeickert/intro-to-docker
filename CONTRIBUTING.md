@@ -6,7 +6,7 @@ If you would like to contribute to the introduction tutorial please review the g
 
 If you have a feature request or a suggested change please
 If your Issue matches one of the following cases please use the provided template:
-- [Request a new feature](https://github.com/matthewfeickert/Intro-to-Docker/issues/new?template=Feature-Request.md)
+- [Request a new feature](https://github.com/matthewfeickert/Intro-to-Docker/issues/new?template=Feature-Request.md&title=Feature+Request+:+Title+Here)
 - [Report a bug](https://github.com/matthewfeickert/Intro-to-Docker/issues/new?template=Bug-Report.md&labels=bug&title=Bug+Report+:+Title+Here)
 
 ## Pull Requests
