@@ -274,6 +274,12 @@ Then [start a Jupyter server](https://jupyter.readthedocs.io/en/latest/running.h
 jupyter notebook --allow-root --no-browser --ip 0.0.0.0
 ```
 
+though for your convince the example container has been configured with these default settings so you can just run
+
+```
+jupyter notebook
+```
+
 Finally, copy and paste the following with the generated token from the server as `<token>` into your web browser on your local host machine
 
 ```
