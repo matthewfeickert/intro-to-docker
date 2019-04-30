@@ -22,8 +22,11 @@ An opinionated introduction to using [Docker](https://www.docker.com/) as a soft
 	- [Monitoring Containers](#monitoring-containers)
 	- [Exiting and restarting containers](#exiting-and-restarting-containers)
 	- [File I/O with Containers](#file-io-with-containers)
+		- [Copying](#copying)
+		- [Volume mounting](#volume-mounting)
 	- [Running Jupyter from a Docker Container](#running-jupyter-from-a-docker-container)
 	- [Docker as Containers as a Service (CaaS)](#docker-as-containers-as-a-service-caas)
+	- [Continuous Integration (CI) and Continuous Deployment (CD)](#continuous-integration-ci-and-continuous-deployment-cd)
 - [Contributing](#contributing)
 - [Authors](#authors)
 
@@ -195,6 +198,8 @@ docker run --rm -it <IMAGE> /bin/bash
 
 ### File I/O with Containers
 
+#### Copying
+
 [Copying](https://docs.docker.com/engine/reference/commandline/cp/) files between the local host and Docker containers is possible. On your local host find a file that you want to transfer to the container and then
 
 ```
@@ -217,6 +222,40 @@ and verify if you want that the file has been modified as you wanted
 
 ```
 tail example_file.txt
+```
+
+#### Volume mounting
+
+What is more common and arguably more useful is to [mount volumes](https://docs.docker.com/storage/volumes/) to containers with the `-v` flag. This allows for direct access to the host file system inside of the container and for container processes to write directly to the host file system.
+
+```
+docker run -v <path on host>:<path in container> <image>
+```
+
+For example, to mount your current working directory on your local machine to the `data` directory in the example container
+
+```
+docker run --rm -it -v $PWD:/home/docker/data matthewfeickert/intro-to-docker
+```
+
+From inside the container you can `ls` to see the contents of your directory on your local machine
+
+```
+ls
+```
+
+and yet you are still inside the container
+
+```
+pwd
+```
+
+You can also see that any files created in this path in the container persist upon exit
+
+```
+touch created_inside.txt
+exit
+ls *.txt
 ```
 
 This I/O allows for Docker images to be used for specific tasks that may be difficult to do with the tools or software installed on only the local host machine. For example, debugging problems with software that arise on cross-platform software, or even just having a specific version of software perform a task (e.g., using Python 2 when you don't want it on your machine, or using a specific release of [TeX Live](https://hub.docker.com/r/matthewfeickert/latex-docker/) when you aren't ready to update your system release).
