@@ -27,6 +27,7 @@ An opinionated introduction to using [Docker](https://www.docker.com/) as a soft
 	- [Running Jupyter from a Docker Container](#running-jupyter-from-a-docker-container)
 	- [Docker as Containers as a Service (CaaS)](#docker-as-containers-as-a-service-caas)
 	- [Continuous Integration (CI) and Continuous Deployment (CD)](#continuous-integration-ci-and-continuous-deployment-cd)
+	- [Dockerfiles](#dockerfiles)
 - [Contributing](#contributing)
 - [Authors](#authors)
 
@@ -307,6 +308,41 @@ This allows for containers to serve as either full pieces of infrastructure (e.g
 ### Continuous Integration (CI) and Continuous Deployment (CD)
 
 To be added for a future extension
+
+### Dockerfiles
+
+Docker images are built through the Docker engine by reading the instructions from a [`Dockerfile`](https://docs.docker.com/engine/reference/builder/). These text based documents provide the instructions though an API similar to the Linux operating system commands to execute commands during the build. The [`Dockerfile` for the example image](https://github.com/matthewfeickert/Intro-to-Docker/blob/master/Dockerfile) being used is an example of some simple extensions of the [official Python 3.6.8 Docker image](https://hub.docker.com/_/python).
+
+As a very simple of extending the example image into a new image create a `Dockerfile`
+
+```
+touch Dockerfile
+```
+
+and then write in it the Docker engine instructions to add [`cowsay`](https://packages.debian.org/jessie/cowsay) and [`scikit-learn`](https://scikit-learn.org) to the environment
+
+```
+# Dockerfile
+FROM matthewfeickert/intro-to-docker:latest
+USER root
+RUN apt-get -qq -y update && \
+    apt-get -qq -y upgrade && \
+    apt-get -qq -y install cowsay && \
+    apt-get -y autoclean && \
+    apt-get -y autoremove && \
+    rm -rf /var/lib/apt-get/lists/* && \
+    ln -s /usr/games/cowsay /usr/bin/cowsay
+RUN pip install --no-cache-dir -q scikit-learn
+USER docker
+```
+
+Then [`build`](https://docs.docker.com/engine/reference/commandline/build/) an image from the `Dockerfile` and tag it with a human readable name
+
+```
+docker build -f Dockerfile -t extend-example:latest --compress .
+```
+
+You can now run the image as a container and verify for yourself that your additions exist
 
 ## Contributing
 
