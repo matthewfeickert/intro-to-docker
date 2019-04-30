@@ -296,6 +296,12 @@ If Docker is run in a [detached](https://docs.docker.com/engine/reference/run/#d
 docker run --rm matthewfeickert/intro-to-docker:latest /bin/bash -c 'cat /etc/os-release && echo "hello" && python --version'
 ```
 
+A more practical example would be to run a Docker container with [TeX Live](https://tug.org/texlive/) in a repo with a LaTeX document with an [`entrypoint`](https://docs.docker.com/engine/reference/builder/#entrypoint) command to build the document
+
+```
+docker run --rm -v $PWD:/home/docker matthewfeickert/latex-docker:latest
+```
+
 This allows for containers to serve as either full pieces of infrastructure (e.g., [reana](http://reanahub.io/)) or as individual instances that are spun up, used, and spun down (think something somewhat along the lines of AWS Lambda).
 
 ### Continuous Integration (CI) and Continuous Deployment (CD)
