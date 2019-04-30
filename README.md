@@ -95,7 +95,7 @@ You are now inside the container in an interactive bash session. Check the file 
 pwd
 ```
 
-revealing that you are in `/root` and check the host to see that you are not in your local host system
+revealing that you are in `/home/docker/data` and check the host to see that you are not in your local host system
 
 ```
 hostname
@@ -173,7 +173,7 @@ docker attach <NAME>
 </details>
 
 
-Notice that your entry point this time was at `/` not `/root`, so navigate to `/root` (which is `$HOME`) and then check that your `test.txt` still exists
+Notice that your entry point is still `/home/docker/data` and then check that your `test.txt` still exists
 
 ```
 cd
