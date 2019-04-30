@@ -22,8 +22,12 @@ An opinionated introduction to using [Docker](https://www.docker.com/) as a soft
 	- [Monitoring Containers](#monitoring-containers)
 	- [Exiting and restarting containers](#exiting-and-restarting-containers)
 	- [File I/O with Containers](#file-io-with-containers)
+		- [Copying](#copying)
+		- [Volume mounting](#volume-mounting)
 	- [Running Jupyter from a Docker Container](#running-jupyter-from-a-docker-container)
 	- [Docker as Containers as a Service (CaaS)](#docker-as-containers-as-a-service-caas)
+	- [Continuous Integration (CI) and Continuous Deployment (CD)](#continuous-integration-ci-and-continuous-deployment-cd)
+	- [Dockerfiles](#dockerfiles)
 - [Contributing](#contributing)
 - [Authors](#authors)
 
@@ -95,7 +99,7 @@ You are now inside the container in an interactive bash session. Check the file 
 pwd
 ```
 
-revealing that you are in `/root` and check the host to see that you are not in your local host system
+revealing that you are in `/home/docker/data` and check the host to see that you are not in your local host system
 
 ```
 hostname
@@ -173,7 +177,7 @@ docker attach <NAME>
 </details>
 
 
-Notice that your entry point this time was at `/` not `/root`, so navigate to `/root` (which is `$HOME`) and then check that your `test.txt` still exists
+Notice that your entry point is still `/home/docker/data` and then check that your `test.txt` still exists
 
 ```
 cd
@@ -194,6 +198,8 @@ docker run --rm -it <IMAGE> /bin/bash
 </details>
 
 ### File I/O with Containers
+
+#### Copying
 
 [Copying](https://docs.docker.com/engine/reference/commandline/cp/) files between the local host and Docker containers is possible. On your local host find a file that you want to transfer to the container and then
 
@@ -219,6 +225,40 @@ and verify if you want that the file has been modified as you wanted
 tail example_file.txt
 ```
 
+#### Volume mounting
+
+What is more common and arguably more useful is to [mount volumes](https://docs.docker.com/storage/volumes/) to containers with the `-v` flag. This allows for direct access to the host file system inside of the container and for container processes to write directly to the host file system.
+
+```
+docker run -v <path on host>:<path in container> <image>
+```
+
+For example, to mount your current working directory on your local machine to the `data` directory in the example container
+
+```
+docker run --rm -it -v $PWD:/home/docker/data matthewfeickert/intro-to-docker
+```
+
+From inside the container you can `ls` to see the contents of your directory on your local machine
+
+```
+ls
+```
+
+and yet you are still inside the container
+
+```
+pwd
+```
+
+You can also see that any files created in this path in the container persist upon exit
+
+```
+touch created_inside.txt
+exit
+ls *.txt
+```
+
 This I/O allows for Docker images to be used for specific tasks that may be difficult to do with the tools or software installed on only the local host machine. For example, debugging problems with software that arise on cross-platform software, or even just having a specific version of software perform a task (e.g., using Python 2 when you don't want it on your machine, or using a specific release of [TeX Live](https://hub.docker.com/r/matthewfeickert/latex-docker/) when you aren't ready to update your system release).
 
 ### Running Jupyter from a Docker Container
@@ -233,6 +273,12 @@ Then [start a Jupyter server](https://jupyter.readthedocs.io/en/latest/running.h
 
 ```
 jupyter notebook --allow-root --no-browser --ip 0.0.0.0
+```
+
+though for your convince the example container has been configured with these default settings so you can just run
+
+```
+jupyter notebook
 ```
 
 Finally, copy and paste the following with the generated token from the server as `<token>` into your web browser on your local host machine
@@ -251,11 +297,52 @@ If Docker is run in a [detached](https://docs.docker.com/engine/reference/run/#d
 docker run --rm matthewfeickert/intro-to-docker:latest /bin/bash -c 'cat /etc/os-release && echo "hello" && python --version'
 ```
 
+A more practical example would be to run a Docker container with [TeX Live](https://tug.org/texlive/) in a repo with a LaTeX document with an [`entrypoint`](https://docs.docker.com/engine/reference/builder/#entrypoint) command to build the document
+
+```
+docker run --rm -v $PWD:/home/docker matthewfeickert/latex-docker:latest
+```
+
 This allows for containers to serve as either full pieces of infrastructure (e.g., [reana](http://reanahub.io/)) or as individual instances that are spun up, used, and spun down (think something somewhat along the lines of AWS Lambda).
 
 ### Continuous Integration (CI) and Continuous Deployment (CD)
 
 To be added for a future extension
+
+### Dockerfiles
+
+Docker images are built through the Docker engine by reading the instructions from a [`Dockerfile`](https://docs.docker.com/engine/reference/builder/). These text based documents provide the instructions though an API similar to the Linux operating system commands to execute commands during the build. The [`Dockerfile` for the example image](https://github.com/matthewfeickert/Intro-to-Docker/blob/master/Dockerfile) being used is an example of some simple extensions of the [official Python 3.6.8 Docker image](https://hub.docker.com/_/python).
+
+As a very simple of extending the example image into a new image create a `Dockerfile`
+
+```
+touch Dockerfile
+```
+
+and then write in it the Docker engine instructions to add [`cowsay`](https://packages.debian.org/jessie/cowsay) and [`scikit-learn`](https://scikit-learn.org) to the environment
+
+```
+# Dockerfile
+FROM matthewfeickert/intro-to-docker:latest
+USER root
+RUN apt-get -qq -y update && \
+    apt-get -qq -y upgrade && \
+    apt-get -qq -y install cowsay && \
+    apt-get -y autoclean && \
+    apt-get -y autoremove && \
+    rm -rf /var/lib/apt-get/lists/* && \
+    ln -s /usr/games/cowsay /usr/bin/cowsay
+RUN pip install --no-cache-dir -q scikit-learn
+USER docker
+```
+
+Then [`build`](https://docs.docker.com/engine/reference/commandline/build/) an image from the `Dockerfile` and tag it with a human readable name
+
+```
+docker build -f Dockerfile -t extend-example:latest --compress .
+```
+
+You can now run the image as a container and verify for yourself that your additions exist
 
 ## Contributing
 
