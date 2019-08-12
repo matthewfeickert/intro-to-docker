@@ -5,9 +5,9 @@ exercises: 5
 questions:
 - "How do containers interact with my local file system?"
 objectives:
-- "First learning objective. (FIXME)"
+- "First learning objective."
 keypoints:
-- "First key point. Brief Answer to questions. (FIXME)"
+- "First key point. Brief Answer to questions."
 ---
 
 # Copying

@@ -5,9 +5,9 @@ exercises: 5
 questions:
 - "What are containers?"
 objectives:
-- "First learning objective. (FIXME)"
+- "First learning objective."
 keypoints:
-- "First key point. Brief Answer to questions. (FIXME)"
+- "First key point. Brief Answer to questions."
 ---
 
 # Documentation

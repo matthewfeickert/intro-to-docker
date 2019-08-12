@@ -5,9 +5,9 @@ exercises: 5
 questions:
 - "How are containers run?"
 objectives:
-- "First learning objective. (FIXME)"
+- "First learning objective."
 keypoints:
-- "First key point. Brief Answer to questions. (FIXME)"
+- "First key point. Brief Answer to questions."
 ---
 
 To use a Docker image as a particular instance on a host machine you [run](https://docs.docker.com/engine/reference/run/) it as a container. You can run in either a [detached or foreground](https://docs.docker.com/engine/reference/run/#detached-vs-foreground) (interactive) mode.

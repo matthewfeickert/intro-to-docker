@@ -5,9 +5,9 @@ exercises: 5
 questions:
 - "How are Docker images built?"
 objectives:
-- "First learning objective. (FIXME)"
+- "First learning objective."
 keypoints:
-- "First key point. Brief Answer to questions. (FIXME)"
+- "First key point. Brief Answer to questions."
 ---
 
 Docker images are built through the Docker engine by reading the instructions from a [`Dockerfile`](https://docs.docker.com/engine/reference/builder/). These text based documents provide the instructions though an API similar to the Linux operating system commands to execute commands during the build. The [`Dockerfile` for the example image](https://github.com/matthewfeickert/Intro-to-Docker/blob/master/Dockerfile) being used is an example of some simple extensions of the [official Python 3.6.8 Docker image](https://hub.docker.com/_/python).
