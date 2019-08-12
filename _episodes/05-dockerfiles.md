@@ -45,3 +45,5 @@ docker build -f Dockerfile -t extend-example:latest --compress .
 {: .source}
 
 You can now run the image as a container and verify for yourself that your additions exist
+
+{% include links.md %}

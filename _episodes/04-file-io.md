@@ -112,3 +112,5 @@ http://localhost:8888/?token=<token>
 {: .source}
 
 You now have access to Jupyter running on your Docker container.
+
+{% include links.md %}
