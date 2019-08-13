@@ -109,18 +109,16 @@ docker attach <CONTAINER ID>
 ~~~
 {: .source}
 
-<details>
- <summary>Starting and attaching by name</summary>
-
-You can also start and attach containers by their name
-
-~~~
-docker start <NAME>
-docker attach <NAME>
-~~~
-{: .source}
-
-</details>
+> ## Starting and attaching by name
+>
+>You can also start and attach containers by their name
+>
+>~~~
+>docker start <NAME>
+>docker attach <NAME>
+>~~~
+>{: .source}
+{: .callout}
 
 
 Notice that your entry point is still `/home/docker/data` and then check that your
@@ -135,18 +133,16 @@ ls
 So this shows us that we can exit Docker containers for arbitrary lengths of time and then
 return to our working environment inside of them as desired.
 
-<details>
- <summary>Clean up a container</summary>
-
-If you want a container to be [cleaned up][docker-docs-run-clean-up] &mdash; that is
-deleted &mdash; after you exit it then run with the `--rm` option flag
-
-~~~
-docker run --rm -it <IMAGE> /bin/bash
-~~~
-{: .source}
-
-</details>
+>## Clean up a container
+>
+>If you want a container to be [cleaned up][docker-docs-run-clean-up] &mdash; that is
+>deleted &mdash; after you exit it then run with the `--rm` option flag
+>
+>~~~
+>docker run --rm -it <IMAGE> /bin/bash
+>~~~
+>{: .source}
+{: .callout}
 
 [docker-docs-run]: https://docs.docker.com/engine/reference/run/
 [docker-docs-run-detached]: https://docs.docker.com/engine/reference/run/#detached-vs-foreground
