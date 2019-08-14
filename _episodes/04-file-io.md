@@ -16,30 +16,48 @@ keypoints:
 On your local host find a file that you want to transfer to the container and then
 
 ~~~
-docker cp <file path> <CONTAINER ID>:/
+touch io_example.txt
+echo "This was written on local host" > io_example.txt
+docker cp io_example.txt <CONTAINER ID>:/home/docker/data/
 ~~~
 {: .source}
 
 and then from the container check and modify it in some way
 
 ~~~
-echo "This was written inside Docker" >> example_file.txt
+pwd
+ls
+cat io_example.txt
+echo "This was written inside Docker" >> io_example.txt
 ~~~
 {: .source}
+
+~~~
+/home/docker/data
+io_example.txt
+This was written on local host
+~~~
+{: .output}
 
 and then on the local host copy the file out of the container
 
 ~~~
-docker cp <CONTAINER ID>:/example_file.txt .
+docker cp <CONTAINER ID>:/home/docker/data/io_example.txt .
 ~~~
 {: .source}
 
 and verify if you want that the file has been modified as you wanted
 
 ~~~
-tail example_file.txt
+cat io_example.txt
 ~~~
 {: .source}
+
+~~~
+This was written on local host
+This was written inside Docker
+~~~
+{: .output}
 
 # Volume mounting
 
@@ -76,6 +94,11 @@ pwd
 ~~~
 {: .source}
 
+~~~
+/home/docker/data
+~~~
+{: .output}
+
 You can also see that any files created in this path in the container persist upon exit
 
 ~~~
@@ -84,6 +107,11 @@ exit
 ls *.txt
 ~~~
 {: .source}
+
+~~~
+created_inside.txt
+~~~
+{: .output}
 
 This I/O allows for Docker images to be used for specific tasks that may be difficult to
 do with the tools or software installed on only the local host machine.
