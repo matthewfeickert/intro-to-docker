@@ -54,6 +54,13 @@ USER docker
 > smaller the size the better.
 {: .callout}
 
+> ## Don't run as `root`
+>
+>By default Docker containers will run as `root`. This is a bad idea and a security concern.
+>Instead, setup a default user (like `docker` in the example) and if needed give the user
+>greater privileges.
+{: .callout}
+
 Then [`build`][docker-docs-build] an image from the `Dockerfile` and tag it with a human
 readable name
 
@@ -89,11 +96,56 @@ scikit-learn       0.21.3
 ~~~
 {: .output}
 
+# Beyond the basics
+
+In the example so far the built image has been tagged as `latest`. However, tags are
+simply arbitrary labels meant to help identify images and images can have multiple tags.
+New tags can be specified in the `docker build` command by giving the `-t` flag multiple
+times or they can be specified after an image is built by using
+[`docker tag`][docker-docs-tag].
+
+~~~
+docker tag <SOURCE_IMAGE[:TAG]> <TARGET_IMAGE[:TAG]>
+~~~
+{: .source}
+
+> ## Add your own tag
+>
+> Using `docker tag` add a new tag to the image you built.
+>
+> > ## Solution
+> >
+> > ~~~
+> >docker images extend-example
+> >docker tag extend-example:latest extend-example:my-tag
+> >docker images extend-example
+> > ~~~
+> > {: .source}
+> >
+> > ~~~
+> >REPOSITORY          TAG                 IMAGE ID            CREATED            SIZE
+> >extend-example      latest              b571a34f63b9        t seconds ago      1.59GB
+> >
+> >REPOSITORY          TAG                 IMAGE ID            CREATED            SIZE
+> >extend-example      latest              b571a34f63b9        t seconds ago      1.59GB
+> >extend-example      my-tag              b571a34f63b9        t seconds ago      1.59GB
+> > ~~~
+> > {: .output}
+> {: .solution}
+{: .challenge}
+
+> ## Tags are labels
+>
+>Note how the image ID didn't change for the two tags: they are the same object.
+>Tags are simply convenient human readable labels.
+{: .callout}
+
 [docker-docs-builder]: https://docs.docker.com/engine/reference/builder/
 [example-Dockerfile]: https://github.com/matthewfeickert/Intro-to-Docker/blob/master/Dockerfile
 [python-docker-image]: https://hub.docker.com/_/python
 [cowsay]: https://packages.debian.org/jessie/cowsay
 [scikit-learn]: https://scikit-learn.org
 [docker-docs-build]: https://docs.docker.com/engine/reference/commandline/build/
+[docker-docs-tag]: https://docs.docker.com/engine/reference/commandline/tag/
 
 {% include links.md %}
