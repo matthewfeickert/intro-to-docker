@@ -1,5 +1,5 @@
 ---
-title: "Writing Dockerfiles"
+title: "Writing Dockerfiles and Building Images"
 teaching: 15
 exercises: 5
 questions:
@@ -98,6 +98,64 @@ scikit-learn       0.21.3
 
 # Beyond the basics
 
+Even though the Dockerfile is a set of specific build instructions to the Docker engine it
+can still be scripted to give greater flexibility by using the Dockerfile
+[`ARG`][docker-docs-ARG] instruction and the [`build-arg`][docker-docs-build-arg] flag to
+define build time variables to be evaluated. For example, consider an example Dockerfile
+with a configurable [`FROM`][docker-docs-FROM] image
+
+~~~
+# Dockerfile.arg-py3
+# Make the base image configurable
+ARG BASEIMAGE=python:3.6
+FROM ${BASEIMAGE}
+USER root
+RUN apt-get -qq -y update && \
+    apt-get -qq -y upgrade && \
+    apt-get -y autoclean && \
+    apt-get -y autoremove && \
+    rm -rf /var/lib/apt-get/lists/*
+RUN pip install --upgrade --no-cache-dir pip setuptools wheel && \
+    pip install --no-cache-dir -q scikit-learn
+# Create user "docker"
+RUN useradd -m docker && \
+    cp /root/.bashrc /home/docker/ && \
+    mkdir /home/docker/data && \
+    chown -R --from=root docker /home/docker
+USER docker
+~~~
+{: .source}
+
+and then build it using the `python:3.7` image as the `FROM` image
+
+~~~
+docker build -f Dockerfile.arg-py3 --build-arg BASEIMAGE=python:3.7 -t arg-example:py-37 --compress .
+~~~
+{: .source}
+
+which you can check has Python 3.7 and not Python 3.6
+
+~~~
+docker run --rm -it arg-example:py-37 /bin/bash
+which python3
+python3 --version
+~~~
+{: .source}
+
+~~~
+/usr/local/bin/python3
+
+Python 3.7.4
+~~~
+{: .output}
+
+> ## Default `ARG` values
+>
+>Setting the value of the `ARG` inside of the Dockerfile allows for default values to be
+>used if no `--build-arg` is passed to `docker build`.
+{: .callout}
+
+
 In the example so far the built image has been tagged as `latest`. However, tags are
 simply arbitrary labels meant to help identify images and images can have multiple tags.
 New tags can be specified in the `docker build` command by giving the `-t` flag multiple
@@ -146,6 +204,9 @@ docker tag <SOURCE_IMAGE[:TAG]> <TARGET_IMAGE[:TAG]>
 [cowsay]: https://packages.debian.org/jessie/cowsay
 [scikit-learn]: https://scikit-learn.org
 [docker-docs-build]: https://docs.docker.com/engine/reference/commandline/build/
+[docker-docs-ARG]: https://docs.docker.com/engine/reference/builder/#arg
+[docker-docs-FROM]: https://docs.docker.com/engine/reference/builder/#from
+[docker-docs-build-arg]: https://docs.docker.com/engine/reference/commandline/build/#set-build-time-variables---build-arg
 [docker-docs-tag]: https://docs.docker.com/engine/reference/commandline/tag/
 
 {% include links.md %}
