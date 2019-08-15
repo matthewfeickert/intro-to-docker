@@ -10,7 +10,10 @@ objectives:
 - "Build a Docker image from a Dockerfile"
 keypoints:
 - "Dockerfiles are written as text file commands to the Docker engine"
-- "Docker images are built with docker build"
+- "Docker images are built with `docker build`"
+- "Built time variables can be defined with `ARG` and set with `--build-arg`"
+- "`ENV` arguments persist into the container runtime"
+- "Docker images can have multiple tags associated to them"
 ---
 
 Docker images are built through the Docker engine by reading the instructions from a
@@ -155,9 +158,75 @@ Python 3.7.4
 >used if no `--build-arg` is passed to `docker build`.
 {: .callout}
 
+[`ENV`][docker-docs-ENV] variables are similar to `ARG` variables, except that they persist
+past the build stage and still accessible in the container runtime.
+Think of using `ENV` in a similar manner to how you would use `export` in Bash.
 
-In the example so far the built image has been tagged as `latest`. However, tags are
-simply arbitrary labels meant to help identify images and images can have multiple tags.
+~~~
+# Dockerfile.arg-py3
+# Make the base image configurable
+ARG BASEIMAGE=python:3.6
+FROM ${BASEIMAGE}
+USER root
+RUN apt-get -qq -y update && \
+    apt-get -qq -y upgrade && \
+    apt-get -y autoclean && \
+    apt-get -y autoremove && \
+    rm -rf /var/lib/apt-get/lists/*
+RUN pip install --upgrade --no-cache-dir pip setuptools wheel && \
+    pip install --no-cache-dir -q scikit-learn
+# Create user "docker"
+RUN useradd -m docker && \
+    cp /root/.bashrc /home/docker/ && \
+    mkdir /home/docker/data && \
+    chown -R --from=root docker /home/docker
+# Use C.UTF-8 locale to avoid issues with ASCII encoding
+ENV LC_ALL=C.UTF-8
+ENV LANG=C.UTF-8
+
+ENV HOME /home/docker/data
+USER docker
+~~~
+{: .source}
+
+~~~
+docker build -f Dockerfile.arg-py3 --build-arg BASEIMAGE=python:3.7 -t arg-example:latest --compress .
+~~~
+{: .source}
+
+~~~
+docker run --rm -it arg-example:latest /bin/bash
+echo $HOME
+echo $LC_ALL
+~~~
+{: .source}
+
+~~~
+/home/docker/data
+
+C.UTF-8
+~~~
+{: .output}
+
+whereas for
+
+~~~
+docker run --rm -it arg-example:py-37 /bin/bash
+echo $HOME
+echo $LC_ALL
+~~~
+{: .source}
+
+~~~
+/home/docker
+
+
+~~~
+{: .output}
+
+In the examples so far the built image has been tagged with a single tag (e.g. `latest`).
+However, tags are simply arbitrary labels meant to help identify images and images can
+have multiple tags.
 New tags can be specified in the `docker build` command by giving the `-t` flag multiple
 times or they can be specified after an image is built by using
 [`docker tag`][docker-docs-tag].
@@ -207,6 +276,7 @@ docker tag <SOURCE_IMAGE[:TAG]> <TARGET_IMAGE[:TAG]>
 [docker-docs-ARG]: https://docs.docker.com/engine/reference/builder/#arg
 [docker-docs-FROM]: https://docs.docker.com/engine/reference/builder/#from
 [docker-docs-build-arg]: https://docs.docker.com/engine/reference/commandline/build/#set-build-time-variables---build-arg
+[docker-docs-ENV]: https://docs.docker.com/engine/reference/builder/#env
 [docker-docs-tag]: https://docs.docker.com/engine/reference/commandline/tag/
 
 {% include links.md %}
