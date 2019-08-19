@@ -24,6 +24,7 @@ The [`Dockerfile` for the example image][example-Dockerfile] being used is an ex
 some simple extensions of the [official Python 3.6.8 Docker image][python-docker-image].
 
 As a very simple of extending the example image into a new image create a `Dockerfile`
+on your local machine
 
 ~~~
 touch Dockerfile
