@@ -14,6 +14,7 @@ keypoints:
 - "Built time variables can be defined with `ARG` and set with `--build-arg`"
 - "`ENV` arguments persist into the container runtime"
 - "Docker images can have multiple tags associated to them"
+- "Docker images can use `COPY` to copy files into them during build"
 ---
 
 Docker images are built through the Docker engine by reading the instructions from a
@@ -268,6 +269,76 @@ docker tag <SOURCE_IMAGE[:TAG]> <TARGET_IMAGE[:TAG]>
 >Tags are simply convenient human readable labels.
 {: .callout}
 
+Docker also gives you the ability to copy external files into a Docker image during the
+build with the [`COPY`][docker-docs-COPY] Dockerfile command.
+Which allows copying a target file on the from a host file system into the Docker image
+file system
+
+~~~
+COPY <path on host> <path in Docker image>
+~~~
+{: .source}
+
+For example, if there is a file called `install_python_deps.sh` in the same directory as
+the build is executed from
+
+~~~
+touch install_python_deps.sh
+~~~
+{: .source}
+
+with contents
+
+~~~
+cat install_python_deps.sh
+~~~
+{: .source}
+
+~~~
+#!/usr/bin/env bash
+
+set -e
+
+pip install --upgrade --no-cache-dir pip setuptools wheel
+pip install --no-cache-dir -q scikit-learn
+~~~
+{: .output}
+
+then this could be copied into the Docker image of the previous example during the build
+and then used (and then removed as it is no longer needed) with the following
+
+~~~
+# Dockerfile.arg-py3
+# Make the base image configurable
+ARG BASEIMAGE=python:3.6
+FROM ${BASEIMAGE}
+USER root
+RUN apt-get -qq -y update && \
+    apt-get -qq -y upgrade && \
+    apt-get -y autoclean && \
+    apt-get -y autoremove && \
+    rm -rf /var/lib/apt-get/lists/*
+COPY install_python_deps.sh install_python_deps.sh
+RUN bash install_python_deps.sh && \
+    rm install_python_deps.sh
+# Create user "docker"
+RUN useradd -m docker && \
+    cp /root/.bashrc /home/docker/ && \
+    mkdir /home/docker/data && \
+    chown -R --from=root docker /home/docker
+USER docker
+~~~
+{: .source}
+
+~~~
+docker build -f Dockerfile.arg-py3 --build-arg BASEIMAGE=python:3.7 -t arg-example:latest --compress .
+~~~
+{: .source}
+
+For very complex scripts or files that are on some remote, `COPY` offers a straightforward
+way to bring them into the Docker build.
+
+
 [docker-docs-builder]: https://docs.docker.com/engine/reference/builder/
 [example-Dockerfile]: https://github.com/matthewfeickert/Intro-to-Docker/blob/master/Dockerfile
 [python-docker-image]: https://hub.docker.com/_/python
@@ -279,5 +350,6 @@ docker tag <SOURCE_IMAGE[:TAG]> <TARGET_IMAGE[:TAG]>
 [docker-docs-build-arg]: https://docs.docker.com/engine/reference/commandline/build/#set-build-time-variables---build-arg
 [docker-docs-ENV]: https://docs.docker.com/engine/reference/builder/#env
 [docker-docs-tag]: https://docs.docker.com/engine/reference/commandline/tag/
+[docker-docs-COPY]: https://docs.docker.com/engine/reference/builder/#copy
 
 {% include links.md %}
