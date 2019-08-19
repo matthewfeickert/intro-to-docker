@@ -17,6 +17,7 @@ On your local host find a file that you want to transfer to the container and th
 
 ~~~
 touch io_example.txt
+# If on Mac need to do: chmod a+x io_example.txt
 echo "This was written on local host" > io_example.txt
 docker cp io_example.txt <CONTAINER ID>:/home/docker/data/
 ~~~
