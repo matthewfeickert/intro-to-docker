@@ -103,6 +103,8 @@ scikit-learn       0.21.3
 
 # Beyond the basics
 
+## `ARG`s and `ENV`s
+
 Even though the Dockerfile is a set of specific build instructions to the Docker engine it
 can still be scripted to give greater flexibility by using the Dockerfile
 [`ARG`][docker-docs-ARG] instruction and the [`build-arg`][docker-docs-build-arg] flag to
@@ -228,6 +230,8 @@ echo $LC_ALL
 ~~~
 {: .output}
 
+## Tags
+
 In the examples so far the built image has been tagged with a single tag (e.g. `latest`).
 However, tags are simply arbitrary labels meant to help identify images and images can
 have multiple tags.
@@ -270,6 +274,8 @@ docker tag <SOURCE_IMAGE[:TAG]> <TARGET_IMAGE[:TAG]>
 >Note how the image ID didn't change for the two tags: they are the same object.
 >Tags are simply convenient human readable labels.
 {: .callout}
+
+## `COPY`
 
 Docker also gives you the ability to copy external files into a Docker image during the
 build with the [`COPY`][docker-docs-COPY] Dockerfile command.
