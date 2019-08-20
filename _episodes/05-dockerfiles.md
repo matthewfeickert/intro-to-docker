@@ -127,6 +127,7 @@ RUN useradd -m docker && \
     cp /root/.bashrc /home/docker/ && \
     mkdir /home/docker/data && \
     chown -R --from=root docker /home/docker
+WORKDIR /home/docker/data
 USER docker
 ~~~
 {: .source}
@@ -186,7 +187,8 @@ RUN useradd -m docker && \
 ENV LC_ALL=C.UTF-8
 ENV LANG=C.UTF-8
 
-ENV HOME /home/docker/data
+ENV HOME /home/docker
+WORKDIR ${BASE_IMAGE}/data
 USER docker
 ~~~
 {: .source}
@@ -204,7 +206,7 @@ echo $LC_ALL
 {: .source}
 
 ~~~
-/home/docker/data
+/home/docker
 
 C.UTF-8
 ~~~
@@ -326,6 +328,8 @@ RUN useradd -m docker && \
     cp /root/.bashrc /home/docker/ && \
     mkdir /home/docker/data && \
     chown -R --from=root docker /home/docker
+ENV HOME /home/docker
+WORKDIR ${BASE_IMAGE}/data
 USER docker
 ~~~
 {: .source}
@@ -337,6 +341,81 @@ docker build -f Dockerfile.arg-py3 --build-arg BASE_IMAGE=python:3.7 -t arg-exam
 
 For very complex scripts or files that are on some remote, `COPY` offers a straightforward
 way to bring them into the Docker build.
+
+> ## Using `COPY`
+>
+> Write a Bash script that installs the `tree` utility and then use `COPY` to add it to
+> your Dockerfile and then run it during the build  
+>
+> > ## Solution
+> >
+> > ~~~
+> > touch install_tree.sh
+> > ~~~
+> > {: .source}
+> >
+> > ~~~bash
+> > #install_tree.sh
+> >#!/usr/bin/env bash
+> >
+> >set -e
+> >
+> >apt-get install tree
+> > ~~~
+> > {: .bash}
+> >
+> >~~~
+> ># Dockerfile.arg-py3
+> ># Make the base image configurable
+> >ARG BASE_IMAGE=python:3.6
+> >FROM ${BASE_IMAGE}
+> >USER root
+> >RUN apt-get -qq -y update && \
+> >    apt-get -qq -y upgrade && \
+> >    apt-get -y autoclean && \
+> >    apt-get -y autoremove && \
+> >    rm -rf /var/lib/apt-get/lists/*
+> >COPY install_python_deps.sh install_python_deps.sh
+> >RUN bash install_python_deps.sh && \
+> >    rm install_python_deps.sh
+> >COPY install_tree.sh install_tree.sh
+> >RUN bash install_tree.sh && \
+> >    rm install_tree.sh
+> ># Create user "docker"
+> >RUN useradd -m docker && \
+> >    cp /root/.bashrc /home/docker/ && \
+> >    mkdir /home/docker/data && \
+> >    chown -R --from=root docker /home/docker
+> >ENV HOME /home/docker
+> >WORKDIR ${BASE_IMAGE}/data
+> >USER docker
+> >~~~
+> >{: .source}
+> >
+> >~~~
+> >docker build -f Dockerfile.arg-py3 --build-arg BASE_IMAGE=python:3.7 -t arg-example:latest --compress .
+> >~~~
+> >{: .source}
+> >
+> >~~~
+> >docker run --rm -it arg-example:latest /bin/bash
+> > cd
+> > which tree
+> > tree
+> >~~~
+> >{: .source}
+> >
+> > ~~~
+> >/usr/bin/tree
+> >
+> >.
+> >└── data
+> >
+> >1 directory, 0 files
+> > ~~~
+> > {: .output}
+> {: .solution}
+{: .challenge}
 
 
 [docker-docs-builder]: https://docs.docker.com/engine/reference/builder/
