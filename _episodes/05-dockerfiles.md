@@ -112,8 +112,8 @@ with a configurable [`FROM`][docker-docs-FROM] image
 ~~~
 # Dockerfile.arg-py3
 # Make the base image configurable
-ARG BASEIMAGE=python:3.6
-FROM ${BASEIMAGE}
+ARG BASE_IMAGE=python:3.6
+FROM ${BASE_IMAGE}
 USER root
 RUN apt-get -qq -y update && \
     apt-get -qq -y upgrade && \
@@ -134,7 +134,7 @@ USER docker
 and then build it using the `python:3.7` image as the `FROM` image
 
 ~~~
-docker build -f Dockerfile.arg-py3 --build-arg BASEIMAGE=python:3.7 -t arg-example:py-37 --compress .
+docker build -f Dockerfile.arg-py3 --build-arg BASE_IMAGE=python:3.7 -t arg-example:py-37 --compress .
 ~~~
 {: .source}
 
@@ -167,8 +167,8 @@ Think of using `ENV` in a similar manner to how you would use `export` in Bash.
 ~~~
 # Dockerfile.arg-py3
 # Make the base image configurable
-ARG BASEIMAGE=python:3.6
-FROM ${BASEIMAGE}
+ARG BASE_IMAGE=python:3.6
+FROM ${BASE_IMAGE}
 USER root
 RUN apt-get -qq -y update && \
     apt-get -qq -y upgrade && \
@@ -192,7 +192,7 @@ USER docker
 {: .source}
 
 ~~~
-docker build -f Dockerfile.arg-py3 --build-arg BASEIMAGE=python:3.7 -t arg-example:latest --compress .
+docker build -f Dockerfile.arg-py3 --build-arg BASE_IMAGE=python:3.7 -t arg-example:latest --compress .
 ~~~
 {: .source}
 
@@ -310,8 +310,8 @@ and then used (and then removed as it is no longer needed) with the following
 ~~~
 # Dockerfile.arg-py3
 # Make the base image configurable
-ARG BASEIMAGE=python:3.6
-FROM ${BASEIMAGE}
+ARG BASE_IMAGE=python:3.6
+FROM ${BASE_IMAGE}
 USER root
 RUN apt-get -qq -y update && \
     apt-get -qq -y upgrade && \
@@ -331,7 +331,7 @@ USER docker
 {: .source}
 
 ~~~
-docker build -f Dockerfile.arg-py3 --build-arg BASEIMAGE=python:3.7 -t arg-example:latest --compress .
+docker build -f Dockerfile.arg-py3 --build-arg BASE_IMAGE=python:3.7 -t arg-example:latest --compress .
 ~~~
 {: .source}
 
