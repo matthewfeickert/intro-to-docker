@@ -1,7 +1,7 @@
 ---
 title: "Writing Dockerfiles and Building Images"
-teaching: 15
-exercises: 5
+teaching: 20
+exercises: 10
 questions:
 - "How are Dockerfiles written?"
 - "How are Docker images built?"
