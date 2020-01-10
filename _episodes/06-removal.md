@@ -10,6 +10,7 @@ objectives:
 keypoints:
 - "Remove containers with `docker rm`"
 - "Remove images with `docker rmi`"
+- "Perform faster cleanup with `docker container prune`, `docker image prune`, and `docker system prune`"
 ---
 
 You can cleanup/remove a container [`docker rm`][docker-docs-rm]
@@ -102,13 +103,12 @@ docker rmi <IMAGE ID>
 > {: .solution}
 {: .challenge}
 
-> ## Helpful `.bashrc` aliases
->~~~
-># Remove stopped Docker containers
->alias rmDockerContainers='docker ps -aq --no-trunc -f status=exited | xargs docker rm'
-># Remove intermediate and untagged images
->alias rmIntermediateImages='docker rmi $(docker images --filter "dangling=true" -q --no-trunc)'
->~~~
+> ## Helpful cleanup commands
+> What is helpful is to have Docker detect and remove unwanted images and containers for you.
+> This can be done with `prune`, which depending on the context will remove different things.
+> - [`docker container prune`](https://docs.docker.com/engine/reference/commandline/container_prune/) removes all stopped containers, which is helpful to clean up forgotten stopped containers.
+> - [`docker image prune`](https://docs.docker.com/engine/reference/commandline/image_prune/) removes all unused or dangling images (images that do not have a tag). This is helpful for cleaning up after builds.
+> - [`docker system prune`](https://docs.docker.com/engine/reference/commandline/system_prune/) removes all stopped containers, dangling images, and dangling build caches. This is very helpful for cleaning up everything all at once.
 {: .callout}
 
 [docker-docs-rm]: https://docs.docker.com/engine/reference/commandline/rm/
