@@ -1,6 +1,4 @@
-FROM python:3.6.8
-
-MAINTAINER Matthew Feickert <matthewfeickert@users.noreply.github.com>
+FROM python:3.8
 
 WORKDIR /root
 
@@ -10,8 +8,7 @@ SHELL [ "/bin/bash", "-c" ]
 RUN apt-get -qq -y update && \
     apt-get -qq -y install apt-utils && \
     apt-get -qq -y update && \
-    apt-get -qq -y upgrade && \
-    apt-get -qq -y install \
+    apt-get -qq -y install --no-install-recommends \
         sudo \
         curl \
         wget \
@@ -19,11 +16,10 @@ RUN apt-get -qq -y update && \
         emacs && \
     apt-get -y autoclean && \
     apt-get -y autoremove && \
-    rm -rf /var/lib/apt-get/lists/*
+    rm -rf /var/lib/apt/lists/*
 
 RUN pip install --upgrade --no-cache-dir pip setuptools wheel && \
     pip install --no-cache-dir -q \
-     numpy \
      scipy \
      matplotlib \
      jupyter
