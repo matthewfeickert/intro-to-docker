@@ -27,3 +27,22 @@ jobs:
       run: |
         make site
         ls -lhtra _site/
+
+  docker:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v2
+    - name: Build Docker image
+      if: "!(startsWith(github.ref, 'refs/tags/'))"
+      uses: docker/build-push-action@v1
+      with:
+        repository: matthewfeickert/intro-to-docker
+        dockerfile: docker/Dockerfile
+        tags: test
+        tag_with_sha: true
+        tag_with_ref: true
+        push: false
+    - name: List Built Images
+      run: docker images
