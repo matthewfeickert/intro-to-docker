@@ -2,10 +2,10 @@ name: Deploy website
 
 on:
   push:
-    branches:
-    - main
-    tags:
-    - v*
+    # branches:
+    # - main
+    # tags:
+    # - v*
 
 jobs:
 
@@ -32,7 +32,7 @@ jobs:
         ls -lhtra _site/
 
     - name: Deploy site to GitHub pages
-      if: success() && github.event_name == 'push' && github.ref == 'refs/heads/main'
+      # if: success() && github.event_name == 'push' && github.ref == 'refs/heads/main'
       uses: peaceiris/actions-gh-pages@v3
       with:
         github_token: ${{ secrets.GITHUB_TOKEN }}
