@@ -22,7 +22,8 @@ RUN pip install --upgrade --no-cache-dir pip setuptools wheel && \
     pip install --no-cache-dir -q \
      scipy \
      matplotlib \
-     jupyter
+     jupyter \
+     jupyterlab
 
 # Have Jupyter notebooks launch without additional command line options
 RUN jupyter notebook --generate-config && \
