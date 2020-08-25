@@ -165,3 +165,10 @@ image:
 	docker build . \
 		-f docker/Dockerfile \
 		-t matthewfeickert/intro-to-docker:debug-local
+
+docker_debug:
+	docker run \
+		--rm \
+		-it \
+		-p 8888:8888 \
+		matthewfeickert/intro-to-docker:debug-local
