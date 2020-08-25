@@ -160,3 +160,8 @@ lesson-fixme :
 ## * commands         : show all commands.
 commands :
 	@sed -n -e '/^##/s|^##[[:space:]]*||p' $(MAKEFILE_LIST)
+
+image:
+	docker build . \
+		-f docker/Dockerfile \
+		-t matthewfeickert/intro-to-docker:debug-local
