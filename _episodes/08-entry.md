@@ -107,7 +107,7 @@ The [`ENTRYPOINT`][docker-docs-ENTRYPOINT] builder command allows to define a co
 commands that are **always** run at the "entry" to the Docker container.
 If an `ENTRYPOINT` has been defined then `CMD` provides optional inputs to the `ENTRYPOINT`.
 
-~~~bash
+~~~
 # entrypoint.sh
 #!/usr/bin/env bash
 
@@ -125,7 +125,7 @@ main "$@"
 
 /bin/bash
 ~~~
-{: .bash}
+{: .language-bash}
 
 ~~~
 # Dockerfile.defaults

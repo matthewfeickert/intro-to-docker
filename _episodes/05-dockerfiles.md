@@ -360,7 +360,7 @@ way to bring them into the Docker build.
 > > ~~~
 > > {: .source}
 > >
-> > ~~~bash
+> > ~~~
 > > #install_tree.sh
 > >#!/usr/bin/env bash
 > >
@@ -368,7 +368,7 @@ way to bring them into the Docker build.
 > >
 > >apt-get install tree
 > > ~~~
-> > {: .bash}
+> > {: .language-bash}
 > >
 > >~~~
 > ># Dockerfile.arg-py3

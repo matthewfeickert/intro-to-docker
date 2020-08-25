@@ -90,7 +90,7 @@ You can call it whatever you like, but as an example we'll used "build-with-ci-e
 > >
 > > Make a file named `entrypoint.sh` that contains  
 > >
-> >~~~bash
+> >~~~
 > >#!/usr/bin/env bash
 > >
 > >set -e
@@ -107,7 +107,7 @@ You can call it whatever you like, but as an example we'll used "build-with-ci-e
 > >
 > >/bin/bash
 > >~~~
-> >{: .bash}
+> >{: .language-bash}
 > {: .solution}
 {: .challenge}
 
