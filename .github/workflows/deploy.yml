@@ -1,0 +1,44 @@
+name: Deploy website
+
+on:
+  push:
+    branches:
+    - main
+    tags:
+    - v*
+
+jobs:
+
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v2
+
+    - name: Set up Ruby
+      uses: actions/setup-ruby@v1
+      with:
+        ruby-version: '2.7.1'
+
+    - name: Install Ruby dependencies
+      run: |
+        gem install github-pages bundler kramdown
+
+    - name: Build site
+      run: |
+        make site
+        rm _site/README.md
+        rm _site/CONTRIBUTING.md
+        ls -lhtra _site/
+
+    - name: Deploy site to GitHub pages
+      if: success() && github.event_name == 'push' && github.ref == 'refs/heads/main'
+      uses: peaceiris/actions-gh-pages@v3
+      with:
+        github_token: ${{ secrets.GITHUB_TOKEN }}
+        publish_dir: _site
+        publish_branch: gh-pages
+        force_orphan: true
+        user_name: 'github-actions[bot]'
+        user_email: 'github-actions[bot]@users.noreply.github.com'
+        commit_message: Deploy to GitHub pages

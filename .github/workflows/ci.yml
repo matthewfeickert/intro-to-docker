@@ -1,0 +1,29 @@
+name: CI
+
+on:
+  pull_request:
+
+jobs:
+
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v2
+
+    - name: Set up Ruby
+      uses: actions/setup-ruby@v1
+      with:
+        ruby-version: '2.7.1'
+    - name: Install Ruby dependencies
+      run: |
+        gem install github-pages bundler kramdown
+
+    - name: Check lesson
+      run: |
+        make lesson-check
+
+    - name: Build site
+      run: |
+        make site
+        ls -lhtra _site/
