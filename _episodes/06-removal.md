@@ -81,8 +81,9 @@ docker rmi <IMAGE ID>
 > >docker.io/library/python:2.7
 > >
 > >REPOSITORY          TAG                 IMAGE ID            CREATED             SIZE
-> >python              2.7                 d75b4eed9ada        14 hours ago        886MB
-> >python              3.7                 e440e2151380        23 hours ago        918MB
+> >python              3.7                 5c1cd4638fb7        8 days ago          876MB
+> >python              3.8                 79cc46abd78d        2 weeks ago         882MB
+> >python              2.7                 68e7be49c28c        4 months ago        902MB
 > >
 > >Untagged: python@sha256:<the relevant SHA hash>
 > >Deleted: sha256:<layer SHA hash>
@@ -97,7 +98,8 @@ docker rmi <IMAGE ID>
 > >Deleted: sha256:<layer SHA hash>
 > >
 > >REPOSITORY          TAG                 IMAGE ID            CREATED             SIZE
-> >python              3.7                 e440e2151380        23 hours ago        918MB
+> >python              3.7                 5c1cd4638fb7        8 days ago          876MB
+> >python              3.8                 79cc46abd78d        2 weeks ago         882MB
 > > ~~~
 > > {: .output}
 > {: .solution}
@@ -111,7 +113,32 @@ docker rmi <IMAGE ID>
 > - [`docker system prune`](https://docs.docker.com/engine/reference/commandline/system_prune/) removes all stopped containers, dangling images, and dangling build caches. This is very helpful for cleaning up everything all at once.
 {: .callout}
 
+> ## Worth cleaning up to save disk
+> Docker images are just lots of compressed archives, and they can take up lots of disk pretty fast.
+> You can monitor the total disk being used by Docker with [`df`][docker-docs-df]
+> > ~~~
+> >docker system df
+> > ~~~
+> > {: .source}
+> >
+> > ~~~
+> >TYPE                TOTAL               ACTIVE              SIZE                RECLAIMABLE
+> >Images              n                   0                   X.YGB               X.YGB (100%)
+> >Containers          0                   0                   0B                  0B
+> >Local Volumes       m                   0                   A.BkB               A.BkB (100%)
+> >Build Cache         0                   0                   0B                  0B
+> > ~~~
+> > {: .output}
+> > and for lots of detailed information you can use the `-v` verbose flag
+> >
+> > ~~~
+> >docker system df -v
+> > ~~~
+> > {: .source}
+{: .callout}
+
 [docker-docs-rm]: https://docs.docker.com/engine/reference/commandline/rm/
 [docker-docs-rmi]: https://docs.docker.com/engine/reference/commandline/rmi/
+[docker-docs-df]: https://docs.docker.com/engine/reference/commandline/system_df/
 
 {% include links.md %}
