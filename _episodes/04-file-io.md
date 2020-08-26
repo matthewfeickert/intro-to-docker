@@ -5,9 +5,11 @@ exercises: 5
 questions:
 - "How do containers interact with my local file system?"
 objectives:
-- "First learning objective."
+- "Better understand I/O with containers"
 keypoints:
-- "First key point. Brief Answer to questions."
+- "Learn how `docker cp` works"
+- "Learn about volume mounts"
+- "Show port forwarding of applications"
 ---
 
 # Copying
