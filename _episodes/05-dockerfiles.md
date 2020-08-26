@@ -181,7 +181,7 @@ Think of using `ENV` in a similar manner to how you would use `export` in Bash.
 ~~~
 # Dockerfile.arg-py3
 # Make the base image configurable
-ARG BASE_IMAGE=python:3.6
+ARG BASE_IMAGE=python:3.8
 FROM ${BASE_IMAGE}
 USER root
 RUN apt-get -qq -y update && \
@@ -329,7 +329,7 @@ and then used (and then removed as it is no longer needed) with the following
 ~~~
 # Dockerfile.arg-py3
 # Make the base image configurable
-ARG BASE_IMAGE=python:3.6
+ARG BASE_IMAGE=python:3.8
 FROM ${BASE_IMAGE}
 USER root
 RUN apt-get -qq -y update && \
@@ -384,7 +384,7 @@ way to bring them into the Docker build.
 > >~~~
 > ># Dockerfile.arg-py3
 > ># Make the base image configurable
-> >ARG BASE_IMAGE=python:3.6
+> >ARG BASE_IMAGE=python:3.8
 > >FROM ${BASE_IMAGE}
 > >USER root
 > >RUN apt-get -qq -y update && \
