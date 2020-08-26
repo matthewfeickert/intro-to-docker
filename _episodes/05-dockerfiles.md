@@ -44,7 +44,7 @@ RUN apt-get -qq -y update && \
     apt-get -qq -y install cowsay && \
     apt-get -y autoclean && \
     apt-get -y autoremove && \
-    rm -rf /var/lib/apt-get/lists/* && \
+    rm -rf /var/lib/apt/lists/* && \
     ln -s /usr/games/cowsay /usr/bin/cowsay
 RUN pip install --no-cache-dir -q scikit-learn
 USER docker
@@ -121,7 +121,7 @@ RUN apt-get -qq -y update && \
     apt-get -qq -y upgrade && \
     apt-get -y autoclean && \
     apt-get -y autoremove && \
-    rm -rf /var/lib/apt-get/lists/*
+    rm -rf /var/lib/apt/lists/*
 RUN pip install --upgrade --no-cache-dir pip setuptools wheel && \
     pip install --no-cache-dir -q scikit-learn
 # Create user "docker"
@@ -177,7 +177,7 @@ RUN apt-get -qq -y update && \
     apt-get -qq -y upgrade && \
     apt-get -y autoclean && \
     apt-get -y autoremove && \
-    rm -rf /var/lib/apt-get/lists/*
+    rm -rf /var/lib/apt/lists/*
 RUN pip install --upgrade --no-cache-dir pip setuptools wheel && \
     pip install --no-cache-dir -q scikit-learn
 # Create user "docker"
@@ -325,7 +325,7 @@ RUN apt-get -qq -y update && \
     apt-get -qq -y upgrade && \
     apt-get -y autoclean && \
     apt-get -y autoremove && \
-    rm -rf /var/lib/apt-get/lists/*
+    rm -rf /var/lib/apt/lists/*
 COPY install_python_deps.sh install_python_deps.sh
 RUN bash install_python_deps.sh && \
     rm install_python_deps.sh
@@ -380,7 +380,7 @@ way to bring them into the Docker build.
 > >    apt-get -qq -y upgrade && \
 > >    apt-get -y autoclean && \
 > >    apt-get -y autoremove && \
-> >    rm -rf /var/lib/apt-get/lists/*
+> >    rm -rf /var/lib/apt/lists/*
 > >COPY install_python_deps.sh install_python_deps.sh
 > >RUN bash install_python_deps.sh && \
 > >    rm install_python_deps.sh

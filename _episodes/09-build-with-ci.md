@@ -64,7 +64,7 @@ You can call it whatever you like, but as an example we'll used "build-with-ci-e
 > >    apt-get -qq -y upgrade && \
 > >    apt-get -y autoclean && \
 > >    apt-get -y autoremove && \
-> >    rm -rf /var/lib/apt-get/lists/*
+> >    rm -rf /var/lib/apt/lists/*
 > ># Create user "docker"
 > >RUN useradd -m docker && \
 > >    cp /root/.bashrc /home/docker/ && \
