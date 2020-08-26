@@ -22,7 +22,7 @@ Docker images are built through the Docker engine by reading the instructions fr
 These text based documents provide the instructions though an API similar to the Linux
 operating system commands to execute commands during the build.
 The [`Dockerfile` for the example image][example-Dockerfile] being used is an example of
-some simple extensions of the [official Python 3.6.8 Docker image][python-docker-image].
+some simple extensions of the [official Python 3.8.5 Docker image][python-docker-image].
 
 As a very simple of extending the example image into a new image create a `Dockerfile`
 on your local machine
