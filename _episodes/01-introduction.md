@@ -8,7 +8,7 @@ objectives:
 - "Understand the basics of images and containers."
 keypoints:
 - "Images are series of zip files that act as templates for containers."
-- "Containers are runtime instantiation of images --- images with state."
+- "Containers are runtime instantiation of images --- images with state and are native processes."
 ---
 
 # Documentation
@@ -31,12 +31,17 @@ It is still important to know what Docker _is_ and what the components of it _ar
 Docker images are executables that bundle together all necessary components for an
 application or an environment.
 [Docker containers][docker-containers] are the runtime instances of images &mdash; they
-are images with a state.
+are images with a state and act as native Linux processes.
 
 Importantly, containers share the host machine's OS system kernel and so don't require an
 OS per application.
 As discrete processes containers take up only as much memory as necessary, making them
 very lightweight and fast to spin up to run.
+
+It is also worth noting that as images are executables that produce containers, the same image
+can create multiple container instances that are running simultaneously as different processes.
+If you think about other executables that can be run in multiple processes on your machine this
+is perhaps not too surprising.
 
 [![Docker structure](https://www.docker.com/sites/default/files/styles/large/public/container-what-is-container.png)](https://www.docker.com/resources/what-container)
 
