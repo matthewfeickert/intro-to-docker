@@ -62,14 +62,15 @@ cat /etc/os-release
 {: .source}
 
 ~~~
-PRETTY_NAME="Debian GNU/Linux 9 (stretch)"
+PRETTY_NAME="Debian GNU/Linux 10 (buster)"
 NAME="Debian GNU/Linux"
-VERSION_ID="9"
-VERSION="9 (stretch)"
+VERSION_ID="10"
+VERSION="10 (buster)"
+VERSION_CODENAME=buster
 ID=debian
 HOME_URL="https://www.debian.org/"
 SUPPORT_URL="https://www.debian.org/support"
-BUG_REPORT_URL="https://bugs.debian.org/"
+BUG_REPORT_URL="https://bugs.debian.org/
 ~~~
 {: .output}
 
@@ -122,10 +123,10 @@ CONTAINER ID        IMAGE         COMMAND             CREATED             STATUS
 
 # Exiting and restarting containers
 
-As a test, create a file in your container
+As a test, create a file in your container by printing the current datetime into a file
 
 ~~~
-touch test.txt
+date > test.txt
 ~~~
 {: .source}
 
@@ -184,7 +185,7 @@ docker attach <CONTAINER ID>
 
 
 Notice that your entry point is still `/home/docker/data` and then check that your
-`test.txt` still exists
+`test.txt` still exists with the datetime you printed into it
 
 ~~~
 ls
@@ -193,6 +194,16 @@ ls
 
 ~~~
 test.txt
+~~~
+{: .output}
+
+~~~
+cat test.txt
+~~~
+{: .source}
+
+~~~
+Wed Aug 26 08:03:53 UTC 2020
 ~~~
 {: .output}
 
