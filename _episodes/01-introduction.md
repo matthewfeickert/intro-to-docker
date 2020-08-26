@@ -5,9 +5,10 @@ exercises: 5
 questions:
 - "What are containers?"
 objectives:
-- "First learning objective."
+- "Understand the basics of images and containers."
 keypoints:
-- "First key point. Brief Answer to questions."
+- "Images are series of zip files that act as templates for containers."
+- "Containers are runtime instantiation of images --- images with state."
 ---
 
 # Documentation
