@@ -70,7 +70,7 @@ Then [`build`][docker-docs-build] an image from the `Dockerfile` and tag it with
 readable name
 
 ~~~
-docker build -f Dockerfile -t extend-example:latest --compress .
+docker build . -f Dockerfile -t extend-example:latest --compress
 ~~~
 {: .source}
 
@@ -96,10 +96,21 @@ python3 -c "import sklearn as sk; print(sk)"
                 ||----w |
                 ||     ||
 
-scikit-learn       0.21.3
+scikit-learn       0.23.2
 <module 'sklearn' from '/usr/local/lib/python3.6/site-packages/sklearn/__init__.py'>
 ~~~
 {: .output}
+
+> ## Build context matters!
+>
+> In the `docker build` command the first argument we passed, `.`, was the "build context".
+> The build context is the set of files that Docker `build` is aware of when it starts the build.
+> The `.` meant that the build context was set to the contents of the current working directory.
+> Importantly, the _entire_ build context is sent to the Docker daemon at build which means that
+> **any** and **all files** in the build context will be copied and sent.
+> Given this, you want to make sure that your build context doesn't contain any
+> unnecessary large files, or use a `.dockerignore` file to hide them.
+{: .callout}
 
 # Beyond the basics
 
@@ -114,7 +125,7 @@ with a configurable [`FROM`][docker-docs-FROM] image
 ~~~
 # Dockerfile.arg-py3
 # Make the base image configurable
-ARG BASE_IMAGE=python:3.6
+ARG BASE_IMAGE=python:3.8
 FROM ${BASE_IMAGE}
 USER root
 RUN apt-get -qq -y update && \
@@ -141,7 +152,7 @@ docker build -f Dockerfile.arg-py3 --build-arg BASE_IMAGE=python:3.7 -t arg-exam
 ~~~
 {: .source}
 
-which you can check has Python 3.7 and not Python 3.6
+which you can check has Python 3.7 and not Python 3.8
 
 ~~~
 docker run --rm -it arg-example:py-37 /bin/bash
@@ -153,7 +164,7 @@ python3 --version
 ~~~
 /usr/local/bin/python3
 
-Python 3.7.4
+Python 3.7.9
 ~~~
 {: .output}
 
