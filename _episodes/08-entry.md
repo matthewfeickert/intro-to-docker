@@ -69,7 +69,7 @@ RUN apt-get -qq -y update && \
     apt-get -qq -y upgrade && \
     apt-get -y autoclean && \
     apt-get -y autoremove && \
-    rm -rf /var/lib/apt-get/lists/*
+    rm -rf /var/lib/apt/lists/*
 # Create user "docker"
 RUN useradd -m docker && \
     cp /root/.bashrc /home/docker/ && \
@@ -137,7 +137,7 @@ RUN apt-get -qq -y update && \
     apt-get -qq -y upgrade && \
     apt-get -y autoclean && \
     apt-get -y autoremove && \
-    rm -rf /var/lib/apt-get/lists/*
+    rm -rf /var/lib/apt/lists/*
 # Create user "docker"
 RUN useradd -m docker && \
     cp /root/.bashrc /home/docker/ && \

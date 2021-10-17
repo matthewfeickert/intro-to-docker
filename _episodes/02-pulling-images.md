@@ -53,7 +53,7 @@ docker images matthewfeickert/intro-to-docker
 
 ~~~
 REPOSITORY                        TAG                 IMAGE ID            CREATED             SIZE
-matthewfeickert/intro-to-docker   latest              cf6508749ee0        3 months ago        1.49GB
+matthewfeickert/intro-to-docker   latest              f4279e4a8ab0        26 hours ago        1.45GB
 ~~~
 {: .output}
 
@@ -66,7 +66,7 @@ docker images --filter=reference="matthewfeickert/intro-to-docker"
 
 ~~~
 REPOSITORY                        TAG                 IMAGE ID            CREATED             SIZE
-matthewfeickert/intro-to-docker   latest              cf6508749ee0        3 months ago        1.49GB
+matthewfeickert/intro-to-docker   latest              f4279e4a8ab0        26 hours ago        1.45GB
 ~~~
 {: .output}
 
@@ -90,27 +90,45 @@ Status: Downloaded newer image for debian:buster
 docker.io/library/debian:buster
 
 REPOSITORY          TAG                 IMAGE ID            CREATED             SIZE
-debian              buster              00bf7fdd8baf        5 weeks ago         114MB
+debian              buster              ee11c54e6bb7        3 weeks ago         114MB
+~~~
+{: .output}
+
+Additionally, there might be times where the _same_ image has different tags.
+For example, we can pull the `bootcamp-2020` tag of the `matthewfeickert/intro-to-docker`
+image, but when we inspect it we wee that it is the **same** image as the one we already pulled.
+
+~~~
+docker pull matthewfeickert/intro-to-docker:bootcamp-2020
+docker images matthewfeickert/intro-to-docker
+~~~
+{: .source}
+
+~~~
+REPOSITORY                        TAG                 IMAGE ID            CREATED             SIZE
+matthewfeickert/intro-to-docker   bootcamp-2020       f4279e4a8ab0        26 hours ago        1.45GB
+matthewfeickert/intro-to-docker   latest              f4279e4a8ab0        26 hours ago        1.45GB
 ~~~
 {: .output}
 
 > ## Pulling Python
 >
-> Pull the image for Python 3.7 and then list all `python` images along with
+> Pull the image for Python 3.8 and then list all `python` images along with
 > the `matthewfeickert/intro-to-docker` image
 >
 > > ## Solution
 > >
 > > ~~~
-> > docker pull python:3.7
+> > docker pull python:3.8
 > > docker images --filter=reference="matthewfeickert/intro-to-docker" --filter=reference="python"
 > > ~~~
 > > {: .source}
 > >
 > > ~~~
 > > REPOSITORY                        TAG                 IMAGE ID            CREATED             SIZE
-> > python                            3.7                 e440e2151380        23 hours ago        918MB
-> > matthewfeickert/intro-to-docker   latest              cf6508749ee0        3 months ago        1.49GB
+> > python                            3.8                 79cc46abd78d        2 weeks ago         882MB
+> > matthewfeickert/intro-to-docker   bootcamp-2020       f4279e4a8ab0        26 hours ago        1.45GB
+> > matthewfeickert/intro-to-docker   latest              f4279e4a8ab0        26 hours ago        1.45GB
 > > ~~~
 > > {: .output}
 > {: .solution}

@@ -64,7 +64,7 @@ You can call it whatever you like, but as an example we'll used "build-with-ci-e
 > >    apt-get -qq -y upgrade && \
 > >    apt-get -y autoclean && \
 > >    apt-get -y autoremove && \
-> >    rm -rf /var/lib/apt-get/lists/*
+> >    rm -rf /var/lib/apt/lists/*
 > ># Create user "docker"
 > >RUN useradd -m docker && \
 > >    cp /root/.bashrc /home/docker/ && \
@@ -265,9 +265,9 @@ deploy python 3.7:
 ~~~
 {: .source}
 
-> ## Python 3.6 jobs
+> ## python 3.8 jobs
 >
-> What needs to be added to build Python 3.6 images for both validation jobs and deployment
+> What needs to be added to build python 3.8 images for both validation jobs and deployment
 > jobs?
 >
 > > ## Solution
@@ -286,11 +286,11 @@ deploy python 3.7:
 > >  variables:
 > >    TAG: validate-latest
 > >
-> >validate python 3.6:
+> >validate python 3.8:
 > >  extends: .validate_template
 > >  variables:
-> >    BUILD_ARG_1: BASE_IMAGE=python:3.6
-> >    TAG: validate-py-3.6
+> >    BUILD_ARG_1: BASE_IMAGE=python:3.8
+> >    TAG: validate-py-3.8
 > >
 > ># Deploy jobs
 > >deploy python 3.7:
@@ -298,11 +298,11 @@ deploy python 3.7:
 > >  variables:
 > >    TAG: latest
 > >
-> >deploy python 3.6:
+> >deploy python 3.8:
 > >  extends: .deploy_template
 > >  variables:
-> >    BUILD_ARG_1: BASE_IMAGE=python:3.6
-> >    TAG: py-3.6
+> >    BUILD_ARG_1: BASE_IMAGE=python:3.8
+> >    TAG: py-3.8
 > >~~~
 > >{: .source}
 > {: .solution}
@@ -330,24 +330,24 @@ Once they finish, merge the MR and then watch the deploy jobs.
 When the jobs finish navigate to your GitLab Registry tab in your GitLab project UI and
 click on the link named `<user name>/<build-with-ci-example>` under **Container Registry**.
 Notice there are 4 container tags.
-Click on the icon next to the `py-3.6` tag to copy its full registry name into your
+Click on the icon next to the `py-3.8` tag to copy its full registry name into your
 clipboard.
 This can be used to pull the image from your GitLab registry.
 
 > ## Pull your image from GitLab Registry
 >
-> Pull your CI built Python 3.6 image using its full registry name and run it!
+> Pull your CI built python 3.8 image using its full registry name and run it!
 >
 > > ## Solution
 > >
 > >~~~
-> >docker pull gitlab-registry.cern.ch/<user name>/build-with-ci-example:py-3.6
-> >docker run --rm -it gitlab-registry.cern.ch/<user name>/build-with-ci-example:py-3.6
+> >docker pull gitlab-registry.cern.ch/<user name>/build-with-ci-example:py-3.8
+> >docker run --rm -it gitlab-registry.cern.ch/<user name>/build-with-ci-example:py-3.8
 > >python3 --version
 > >~~~
 > >{: .source}
 > >~~~
-Python 3.6.9
+python 3.8.9
 > >~~~
 > >{: .output}
 > {: .solution}

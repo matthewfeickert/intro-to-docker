@@ -5,9 +5,11 @@ exercises: 5
 questions:
 - "How do containers interact with my local file system?"
 objectives:
-- "First learning objective."
+- "Better understand I/O with containers"
 keypoints:
-- "First key point. Brief Answer to questions."
+- "Learn how `docker cp` works"
+- "Learn about volume mounts"
+- "Show port forwarding of applications"
 ---
 
 # Copying
@@ -17,7 +19,7 @@ On your local host find a file that you want to transfer to the container and th
 
 ~~~
 touch io_example.txt
-# If on Mac need to do: chmod a+x io_example.txt
+# If on Mac may need to do: chmod a+x io_example.txt
 echo "This was written on local host" > io_example.txt
 docker cp io_example.txt <CONTAINER ID>:/home/docker/data/
 ~~~
@@ -62,7 +64,7 @@ This was written inside Docker
 
 # Volume mounting
 
-What is more common and arguably more useful is to [mount volumes][docker-docs-volumes] to
+What is more common and arguably **more** useful is to [mount volumes][docker-docs-volumes] to
 containers with the `-v` flag.
 This allows for direct access to the host file system inside of the container and for
 container processes to write directly to the host file system.
@@ -76,7 +78,7 @@ For example, to mount your current working directory on your local machine to th
 directory in the example container
 
 ~~~
-docker run --rm -it -v $PWD:/home/docker/data matthewfeickert/intro-to-docker
+docker run --rm -it -v $PWD:/home/docker/data matthewfeickert/intro-to-docker:latest
 ~~~
 {: .source}
 
@@ -118,8 +120,29 @@ This I/O allows for Docker images to be used for specific tasks that may be diff
 do with the tools or software installed on only the local host machine.
 For example, debugging problems with software that arise on cross-platform software, or
 even just having a specific version of software perform a task (e.g., using Python 2 when
-    you don't want it on your machine, or using a specific release of
-    [TeX Live][Tex-Live-image] when you aren't ready to update your system release).
+you don't want it on your machine, or using a specific release of
+[TeX Live][Tex-Live-image] when you aren't ready to update your system release).
+
+> ## Flag choices
+>
+> What will be the result of running the following command?
+> > ~~~
+> > docker run --rm -v $PWD:/home/docker/data matthewfeickert/intro-to-docker:latest
+> > ~~~
+> > {: .source}
+>
+> > ## Solution
+> >
+> > Outwardly it would appear that there is no affect!
+> > You are returned to your starting terminal.
+> > However, something _did_ happen.
+> > Look again at the flags: `--rm -v` ...but no `-it` for interactive.
+> > So the container got spun up by `docker run`, wasn't given any command and
+> > and so executed a Bash shell with `/bin/bash`, wasn't put into an interactive
+> > state and finished, and then cleaned itself up with `--rm`.
+> {: .solution}
+{: .challenge}
+
 
 # Running Jupyter from a Docker Container
 
@@ -128,14 +151,14 @@ First run a container while [exposing][docker-docs-run-expose-ports] the contain
 internal port `8888` with the `-p` flag
 
 ~~~
-docker run --rm -it -p 8888:8888 matthewfeickert/intro-to-docker /bin/bash
+docker run --rm -it -p 8888:8888 matthewfeickert/intro-to-docker:latest /bin/bash
 ~~~
 {: .source}
 
 Then [start a Jupyter server][jupyter-docs-server] with the server listening on all IPs
 
 ~~~
-jupyter notebook --allow-root --no-browser --ip 0.0.0.0
+jupyter lab --allow-root --no-browser --ip 0.0.0.0
 ~~~
 {: .source}
 
@@ -143,7 +166,7 @@ though for your convince the example container has been configured with these de
 settings so you can just run
 
 ~~~
-jupyter notebook
+jupyter lab
 ~~~
 {: .source}
 

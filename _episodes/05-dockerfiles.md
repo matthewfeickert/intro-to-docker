@@ -22,7 +22,7 @@ Docker images are built through the Docker engine by reading the instructions fr
 These text based documents provide the instructions though an API similar to the Linux
 operating system commands to execute commands during the build.
 The [`Dockerfile` for the example image][example-Dockerfile] being used is an example of
-some simple extensions of the [official Python 3.6.8 Docker image][python-docker-image].
+some simple extensions of the [official Python 3.8.5 Docker image][python-docker-image].
 
 As a very simple of extending the example image into a new image create a `Dockerfile`
 on your local machine
@@ -44,7 +44,7 @@ RUN apt-get -qq -y update && \
     apt-get -qq -y install cowsay && \
     apt-get -y autoclean && \
     apt-get -y autoremove && \
-    rm -rf /var/lib/apt-get/lists/* && \
+    rm -rf /var/lib/apt/lists/* && \
     ln -s /usr/games/cowsay /usr/bin/cowsay
 RUN pip install --no-cache-dir -q scikit-learn
 USER docker
@@ -70,7 +70,7 @@ Then [`build`][docker-docs-build] an image from the `Dockerfile` and tag it with
 readable name
 
 ~~~
-docker build -f Dockerfile -t extend-example:latest --compress .
+docker build . -f Dockerfile -t extend-example:latest --compress
 ~~~
 {: .source}
 
@@ -96,10 +96,21 @@ python3 -c "import sklearn as sk; print(sk)"
                 ||----w |
                 ||     ||
 
-scikit-learn       0.21.3
+scikit-learn       0.23.2
 <module 'sklearn' from '/usr/local/lib/python3.6/site-packages/sklearn/__init__.py'>
 ~~~
 {: .output}
+
+> ## Build context matters!
+>
+> In the `docker build` command the first argument we passed, `.`, was the "build context".
+> The build context is the set of files that Docker `build` is aware of when it starts the build.
+> The `.` meant that the build context was set to the contents of the current working directory.
+> Importantly, the _entire_ build context is sent to the Docker daemon at build which means that
+> **any** and **all files** in the build context will be copied and sent.
+> Given this, you want to make sure that your build context doesn't contain any
+> unnecessary large files, or use a `.dockerignore` file to hide them.
+{: .callout}
 
 # Beyond the basics
 
@@ -114,14 +125,14 @@ with a configurable [`FROM`][docker-docs-FROM] image
 ~~~
 # Dockerfile.arg-py3
 # Make the base image configurable
-ARG BASE_IMAGE=python:3.6
+ARG BASE_IMAGE=python:3.8
 FROM ${BASE_IMAGE}
 USER root
 RUN apt-get -qq -y update && \
     apt-get -qq -y upgrade && \
     apt-get -y autoclean && \
     apt-get -y autoremove && \
-    rm -rf /var/lib/apt-get/lists/*
+    rm -rf /var/lib/apt/lists/*
 RUN pip install --upgrade --no-cache-dir pip setuptools wheel && \
     pip install --no-cache-dir -q scikit-learn
 # Create user "docker"
@@ -141,7 +152,7 @@ docker build -f Dockerfile.arg-py3 --build-arg BASE_IMAGE=python:3.7 -t arg-exam
 ~~~
 {: .source}
 
-which you can check has Python 3.7 and not Python 3.6
+which you can check has Python 3.7 and not Python 3.8
 
 ~~~
 docker run --rm -it arg-example:py-37 /bin/bash
@@ -153,7 +164,7 @@ python3 --version
 ~~~
 /usr/local/bin/python3
 
-Python 3.7.4
+Python 3.7.9
 ~~~
 {: .output}
 
@@ -170,14 +181,14 @@ Think of using `ENV` in a similar manner to how you would use `export` in Bash.
 ~~~
 # Dockerfile.arg-py3
 # Make the base image configurable
-ARG BASE_IMAGE=python:3.6
+ARG BASE_IMAGE=python:3.8
 FROM ${BASE_IMAGE}
 USER root
 RUN apt-get -qq -y update && \
     apt-get -qq -y upgrade && \
     apt-get -y autoclean && \
     apt-get -y autoremove && \
-    rm -rf /var/lib/apt-get/lists/*
+    rm -rf /var/lib/apt/lists/*
 RUN pip install --upgrade --no-cache-dir pip setuptools wheel && \
     pip install --no-cache-dir -q scikit-learn
 # Create user "docker"
@@ -318,14 +329,14 @@ and then used (and then removed as it is no longer needed) with the following
 ~~~
 # Dockerfile.arg-py3
 # Make the base image configurable
-ARG BASE_IMAGE=python:3.6
+ARG BASE_IMAGE=python:3.8
 FROM ${BASE_IMAGE}
 USER root
 RUN apt-get -qq -y update && \
     apt-get -qq -y upgrade && \
     apt-get -y autoclean && \
     apt-get -y autoremove && \
-    rm -rf /var/lib/apt-get/lists/*
+    rm -rf /var/lib/apt/lists/*
 COPY install_python_deps.sh install_python_deps.sh
 RUN bash install_python_deps.sh && \
     rm install_python_deps.sh
@@ -373,14 +384,14 @@ way to bring them into the Docker build.
 > >~~~
 > ># Dockerfile.arg-py3
 > ># Make the base image configurable
-> >ARG BASE_IMAGE=python:3.6
+> >ARG BASE_IMAGE=python:3.8
 > >FROM ${BASE_IMAGE}
 > >USER root
 > >RUN apt-get -qq -y update && \
 > >    apt-get -qq -y upgrade && \
 > >    apt-get -y autoclean && \
 > >    apt-get -y autoremove && \
-> >    rm -rf /var/lib/apt-get/lists/*
+> >    rm -rf /var/lib/apt/lists/*
 > >COPY install_python_deps.sh install_python_deps.sh
 > >RUN bash install_python_deps.sh && \
 > >    rm install_python_deps.sh

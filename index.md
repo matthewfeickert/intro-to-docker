@@ -5,7 +5,13 @@ permalink: index.html  # Is the only page that doesn't follow the pattern /:path
 ---
 An opinionated introduction to using [Docker](https://www.docker.com/) as a software
 development tool.
-Taught at the [**2019 USATLAS Computing Bootcamp** at LBNL](https://smeehan12.github.io/2019-08-19-usatlas-computing-bootcamp/).
+
+<p class="text-center">
+  <a href="https://matthewfeickert.github.io/usatlas-computing-bootcamp-2020/" target=_blank>
+    <button type="button" class="btn btn-info">Taught at the 2020 US-ATLAS Computing Bootcamp</button>
+  </a>
+</p>
+
 
 <!-- this is an html comment -->
 
