@@ -29,7 +29,7 @@ and then from the container check and modify it in some way
 
 ~~~
 pwd
-ls
+ls io_example.txt
 cat io_example.txt
 echo "This was written inside Docker" >> io_example.txt
 ~~~
@@ -147,8 +147,9 @@ you don't want it on your machine, or using a specific release of
 # Running Jupyter from a Docker Container
 
 You can run a Jupyter server from inside of your Docker container.
-First run a container while [exposing][docker-docs-run-expose-ports] the container's
-internal port `8888` with the `-p` flag
+First run a container (with Jupyter installed) while
+[exposing][docker-docs-run-expose-ports] the container's internal port `8888`
+with the `-p` flag
 
 ~~~
 docker run --rm -ti -p 8888:8888 matthewfeickert/intro-to-docker:latest /bin/bash
