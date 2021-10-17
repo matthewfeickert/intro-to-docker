@@ -20,10 +20,10 @@ RUN apt-get -qq -y update && \
 
 RUN python -m pip --no-cache-dir install --upgrade pip setuptools wheel && \
     python -m pip --no-cache-dir install --quiet \
-     scipy \
-     matplotlib \
-     jupyter \
-     jupyterlab
+     scipy~=1.7.1 \
+     matplotlib~=3.4.3 \
+     jupyter~=1.0.0 \
+     jupyterlab~=3.2.0
 
 # Have Jupyter notebooks launch without additional command line options
 RUN jupyter notebook --generate-config && \
