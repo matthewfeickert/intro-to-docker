@@ -22,7 +22,8 @@ Docker images are built through the Docker engine by reading the instructions fr
 These text based documents provide the instructions though an API similar to the Linux
 operating system commands to execute commands during the build.
 The [`Dockerfile` for the example image][example-Dockerfile] being used is an example of
-some simple extensions of the [official Python 3.8.5 Docker image][python-docker-image].
+some simple extensions of the [official Python 3.9 Docker image][python-docker-image]
+based on the Debian Bullseye OS (`python:3.9-bullseye`).
 
 As a very simple of extending the example image into a new image create a `Dockerfile`
 on your local machine
@@ -38,7 +39,9 @@ and then write in it the Docker engine instructions to add [`cowsay`][cowsay] an
 ~~~
 # Dockerfile
 FROM matthewfeickert/intro-to-docker:latest
+
 USER root
+
 RUN apt-get -qq -y update && \
     apt-get -qq -y upgrade && \
     apt-get -qq -y install cowsay && \
@@ -46,7 +49,9 @@ RUN apt-get -qq -y update && \
     apt-get -y autoremove && \
     rm -rf /var/lib/apt/lists/* && \
     ln -s /usr/games/cowsay /usr/bin/cowsay
-RUN pip install --no-cache-dir -q scikit-learn
+
+RUN python -m pip install --no-cache-dir --quiet scikit-learn
+
 USER docker
 ~~~
 {: .source}
@@ -70,7 +75,7 @@ Then [`build`][docker-docs-build] an image from the `Dockerfile` and tag it with
 readable name
 
 ~~~
-docker build . -f Dockerfile -t extend-example:latest --compress
+docker build . -f Dockerfile -t extend-example:latest
 ~~~
 {: .source}
 
@@ -148,7 +153,7 @@ USER docker
 and then build it using the `python:3.7` image as the `FROM` image
 
 ~~~
-docker build -f Dockerfile.arg-py3 --build-arg BASE_IMAGE=python:3.7 -t arg-example:py-37 --compress .
+docker build -f Dockerfile.arg-py3 --build-arg BASE_IMAGE=python:3.7 -t arg-example:py-37 .
 ~~~
 {: .source}
 
@@ -207,7 +212,7 @@ USER docker
 {: .source}
 
 ~~~
-docker build -f Dockerfile.arg-py3 --build-arg BASE_IMAGE=python:3.7 -t arg-example:latest --compress .
+docker build -f Dockerfile.arg-py3 --build-arg BASE_IMAGE=python:3.7 -t arg-example:latest .
 ~~~
 {: .source}
 
@@ -352,7 +357,7 @@ USER docker
 {: .source}
 
 ~~~
-docker build -f Dockerfile.arg-py3 --build-arg BASE_IMAGE=python:3.7 -t arg-example:latest --compress .
+docker build -f Dockerfile.arg-py3 --build-arg BASE_IMAGE=python:3.7 -t arg-example:latest .
 ~~~
 {: .source}
 
@@ -410,7 +415,7 @@ way to bring them into the Docker build.
 > >{: .source}
 > >
 > >~~~
-> >docker build -f Dockerfile.arg-py3 --build-arg BASE_IMAGE=python:3.7 -t arg-example:latest --compress .
+> >docker build -f Dockerfile.arg-py3 --build-arg BASE_IMAGE=python:3.7 -t arg-example:latest .
 > >~~~
 > >{: .source}
 > >
