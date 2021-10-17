@@ -8,7 +8,7 @@ objectives:
 - "Understand the basics of images and containers."
 keypoints:
 - "Images are series of zip files that act as templates for containers."
-- "Containers are runtime instantiation of images --- images with state and are native processes."
+- "Containers are runtime instantiation of images &mdash; images with state and are native processes."
 ---
 
 # Documentation
