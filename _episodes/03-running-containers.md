@@ -62,15 +62,15 @@ cat /etc/os-release
 {: .source}
 
 ~~~
-PRETTY_NAME="Debian GNU/Linux 10 (buster)"
+PRETTY_NAME="Debian GNU/Linux 11 (bullseye)"
 NAME="Debian GNU/Linux"
-VERSION_ID="10"
-VERSION="10 (buster)"
-VERSION_CODENAME=buster
+VERSION_ID="11"
+VERSION="11 (bullseye)"
+VERSION_CODENAME=bullseye
 ID=debian
 HOME_URL="https://www.debian.org/"
 SUPPORT_URL="https://www.debian.org/support"
-BUG_REPORT_URL="https://bugs.debian.org/
+BUG_REPORT_URL="https://bugs.debian.org/"
 ~~~
 {: .output}
 
@@ -188,7 +188,7 @@ Notice that your entry point is still `/home/docker/data` and then check that yo
 `test.txt` still exists with the datetime you printed into it
 
 ~~~
-ls
+ls *.txt
 ~~~
 {: .source}
 
@@ -203,7 +203,7 @@ cat test.txt
 {: .source}
 
 ~~~
-Wed Aug 26 08:03:53 UTC 2021
+Sun Oct 17 16:51:51 UTC 2021
 ~~~
 {: .output}
 
