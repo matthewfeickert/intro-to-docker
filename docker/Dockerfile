@@ -18,8 +18,8 @@ RUN apt-get -qq -y update && \
     apt-get -y autoremove && \
     rm -rf /var/lib/apt/lists/*
 
-RUN pip install --upgrade --no-cache-dir pip setuptools wheel && \
-    pip install --no-cache-dir -q \
+RUN python -m pip --no-cache-dir install --upgrade pip setuptools wheel && \
+    python -m pip --no-cache-dir install --quiet \
      scipy \
      matplotlib \
      jupyter \
