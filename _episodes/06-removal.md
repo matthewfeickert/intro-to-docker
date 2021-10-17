@@ -80,10 +80,11 @@ docker rmi <IMAGE ID>
 > >Status: Downloaded newer image for python:2.7
 > >docker.io/library/python:2.7
 > >
-> >REPOSITORY          TAG                 IMAGE ID            CREATED             SIZE
-> >python              3.7                 5c1cd4638fb7        8 days ago          876MB
-> >python              3.8                 79cc46abd78d        2 weeks ago         882MB
-> >python              2.7                 68e7be49c28c        4 months ago        902MB
+> >REPOSITORY   TAG                 IMAGE ID       CREATED         SIZE
+> >python       3.8                 79372a158581   4 days ago      909MB
+> >python       3.9                 e2d7fd224b9c   4 days ago      912MB
+> >python       3.9-bullseye        e2d7fd224b9c   4 days ago      912MB
+> >python       2.7                 68e7be49c28c   18 months ago   902MB
 > >
 > >Untagged: python@sha256:<the relevant SHA hash>
 > >Deleted: sha256:<layer SHA hash>
@@ -97,9 +98,10 @@ docker rmi <IMAGE ID>
 > >Deleted: sha256:<layer SHA hash>
 > >Deleted: sha256:<layer SHA hash>
 > >
-> >REPOSITORY          TAG                 IMAGE ID            CREATED             SIZE
-> >python              3.7                 5c1cd4638fb7        8 days ago          876MB
-> >python              3.8                 79cc46abd78d        2 weeks ago         882MB
+> >REPOSITORY   TAG                 IMAGE ID       CREATED         SIZE
+> >python       3.8                 79372a158581   4 days ago      909MB
+> >python       3.9                 e2d7fd224b9c   4 days ago      912MB
+> >python       3.9-bullseye        e2d7fd224b9c   4 days ago      912MB
 > > ~~~
 > > {: .output}
 > {: .solution}
