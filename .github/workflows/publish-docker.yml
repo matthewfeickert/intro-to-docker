@@ -22,7 +22,7 @@ jobs:
         password: ${{ secrets.DOCKER_PASSWORD }}
         repository: matthewfeickert/intro-to-docker
         dockerfile: docker/Dockerfile
-        tags: latest,bootcamp-2020
+        tags: latest,bootcamp-2021
     - name: Build and Publish to Registry with Release Tag
       if: startsWith(github.ref, 'refs/tags/')
       uses: docker/build-push-action@v1

@@ -7,8 +7,8 @@ An opinionated introduction to using [Docker](https://www.docker.com/) as a soft
 development tool.
 
 <p class="text-center">
-  <a href="https://matthewfeickert.github.io/usatlas-computing-bootcamp-2020/" target=_blank>
-    <button type="button" class="btn btn-info">Taught at the 2020 US-ATLAS Computing Bootcamp</button>
+  <a href="https://jghaley.github.io/usatlas-computing-bootcamp-2021/" target=_blank>
+    <button type="button" class="btn btn-info">Taught at the 2021 US-ATLAS Computing Bootcamp</button>
   </a>
 </p>
 

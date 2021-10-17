@@ -95,18 +95,18 @@ debian              buster              ee11c54e6bb7        3 weeks ago         
 {: .output}
 
 Additionally, there might be times where the _same_ image has different tags.
-For example, we can pull the `bootcamp-2020` tag of the `matthewfeickert/intro-to-docker`
+For example, we can pull the `bootcamp-2021` tag of the `matthewfeickert/intro-to-docker`
 image, but when we inspect it we wee that it is the **same** image as the one we already pulled.
 
 ~~~
-docker pull matthewfeickert/intro-to-docker:bootcamp-2020
+docker pull matthewfeickert/intro-to-docker:bootcamp-2021
 docker images matthewfeickert/intro-to-docker
 ~~~
 {: .source}
 
 ~~~
 REPOSITORY                        TAG                 IMAGE ID            CREATED             SIZE
-matthewfeickert/intro-to-docker   bootcamp-2020       f4279e4a8ab0        26 hours ago        1.45GB
+matthewfeickert/intro-to-docker   bootcamp-2021       f4279e4a8ab0        26 hours ago        1.45GB
 matthewfeickert/intro-to-docker   latest              f4279e4a8ab0        26 hours ago        1.45GB
 ~~~
 {: .output}
@@ -127,7 +127,7 @@ matthewfeickert/intro-to-docker   latest              f4279e4a8ab0        26 hou
 > > ~~~
 > > REPOSITORY                        TAG                 IMAGE ID            CREATED             SIZE
 > > python                            3.8                 79cc46abd78d        2 weeks ago         882MB
-> > matthewfeickert/intro-to-docker   bootcamp-2020       f4279e4a8ab0        26 hours ago        1.45GB
+> > matthewfeickert/intro-to-docker   bootcamp-2021       f4279e4a8ab0        26 hours ago        1.45GB
 > > matthewfeickert/intro-to-docker   latest              f4279e4a8ab0        26 hours ago        1.45GB
 > > ~~~
 > > {: .output}
