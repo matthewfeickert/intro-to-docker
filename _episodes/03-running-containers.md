@@ -25,7 +25,7 @@ You can run in either a [detached or foreground][docker-docs-run-detached] (inte
 Run the image we pulled as an interactive container
 
 ~~~
-docker run -it matthewfeickert/intro-to-docker:latest /bin/bash
+docker run -ti matthewfeickert/intro-to-docker:latest /bin/bash
 ~~~
 {: .source}
 
@@ -216,7 +216,7 @@ return to our working environment inside of them as desired.
 >deleted &mdash; after you exit it then run with the `--rm` option flag
 >
 >~~~
->docker run --rm -it <IMAGE> /bin/bash
+>docker run --rm -ti <IMAGE> /bin/bash
 >~~~
 >{: .source}
 {: .callout}

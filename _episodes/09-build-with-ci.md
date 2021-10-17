@@ -88,7 +88,7 @@ You can call it whatever you like, but as an example we'll used "build-with-ci-e
 >
 > > ## Solution
 > >
-> > Make a file named `entrypoint.sh` that contains  
+> > Make a file named `entrypoint.sh` that contains
 > >
 > >~~~
 > >#!/usr/bin/env bash
@@ -160,7 +160,7 @@ except:
 >
 > > ## Solution
 > >
-> > Make a file named `entrypoint.sh` that contains  
+> > Make a file named `entrypoint.sh` that contains
 > >
 > >~~~
 > >stages:
@@ -342,7 +342,7 @@ This can be used to pull the image from your GitLab registry.
 > >
 > >~~~
 > >docker pull gitlab-registry.cern.ch/<user name>/build-with-ci-example:py-3.8
-> >docker run --rm -it gitlab-registry.cern.ch/<user name>/build-with-ci-example:py-3.8
+> >docker run --rm -ti gitlab-registry.cern.ch/<user name>/build-with-ci-example:py-3.8
 > >python3 --version
 > >~~~
 > >{: .source}

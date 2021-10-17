@@ -51,7 +51,7 @@ site : lesson-md
 ## * docker-serve     : use Docker to serve the site
 docker-serve :
 	docker pull carpentries/lesson-docker:latest
-	docker run --rm -it \
+	docker run --rm -ti \
 		-v $${PWD}:/home/rstudio \
 		-p 4000:4000 \
 		-p 8787:8787 \
@@ -170,6 +170,6 @@ image:
 docker_debug:
 	docker run \
 		--rm \
-		-it \
+		-ti \
 		-p 8888:8888 \
 		matthewfeickert/intro-to-docker:debug-local

@@ -77,7 +77,7 @@ docker build . -f Dockerfile -t extend-example:latest --compress
 You can now run the image as a container and verify for yourself that your additions exist
 
 ~~~
-docker run --rm -it extend-example:latest /bin/bash
+docker run --rm -ti extend-example:latest /bin/bash
 which cowsay
 cowsay "Hello from Docker"
 pip list | grep scikit
@@ -155,7 +155,7 @@ docker build -f Dockerfile.arg-py3 --build-arg BASE_IMAGE=python:3.7 -t arg-exam
 which you can check has Python 3.7 and not Python 3.8
 
 ~~~
-docker run --rm -it arg-example:py-37 /bin/bash
+docker run --rm -ti arg-example:py-37 /bin/bash
 which python3
 python3 --version
 ~~~
@@ -212,7 +212,7 @@ docker build -f Dockerfile.arg-py3 --build-arg BASE_IMAGE=python:3.7 -t arg-exam
 {: .source}
 
 ~~~
-docker run --rm -it arg-example:latest /bin/bash
+docker run --rm -ti arg-example:latest /bin/bash
 echo $HOME
 echo $LC_ALL
 ~~~
@@ -228,7 +228,7 @@ C.UTF-8
 whereas for
 
 ~~~
-docker run --rm -it arg-example:py-37 /bin/bash
+docker run --rm -ti arg-example:py-37 /bin/bash
 echo $HOME
 echo $LC_ALL
 ~~~
@@ -362,7 +362,7 @@ way to bring them into the Docker build.
 > ## Using `COPY`
 >
 > Write a Bash script that installs the `tree` utility and then use `COPY` to add it to
-> your Dockerfile and then run it during the build  
+> your Dockerfile and then run it during the build
 >
 > > ## Solution
 > >
@@ -415,7 +415,7 @@ way to bring them into the Docker build.
 > >{: .source}
 > >
 > >~~~
-> >docker run --rm -it arg-example:latest /bin/bash
+> >docker run --rm -ti arg-example:latest /bin/bash
 > > cd
 > > which tree
 > > tree

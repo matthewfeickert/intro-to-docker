@@ -18,7 +18,7 @@ keypoints:
 > >
 > > Mount multiple volumes
 > >~~~
-> >docker run --rm -it \
+> >docker run --rm -ti \
 > >  -w /home/atlas/Bootcamp \
 > >  -v $PWD:/home/atlas/Bootcamp \
 > >  -v $HOME/.ssh:/home/atlas/.ssh \

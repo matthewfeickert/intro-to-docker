@@ -78,7 +78,7 @@ For example, to mount your current working directory on your local machine to th
 directory in the example container
 
 ~~~
-docker run --rm -it -v $PWD:/home/docker/data matthewfeickert/intro-to-docker:latest
+docker run --rm -ti -v $PWD:/home/docker/data matthewfeickert/intro-to-docker:latest
 ~~~
 {: .source}
 
@@ -136,7 +136,7 @@ you don't want it on your machine, or using a specific release of
 > > Outwardly it would appear that there is no affect!
 > > You are returned to your starting terminal.
 > > However, something _did_ happen.
-> > Look again at the flags: `--rm -v` ...but no `-it` for interactive.
+> > Look again at the flags: `--rm -v` ...but no `-ti` for interactive.
 > > So the container got spun up by `docker run`, wasn't given any command and
 > > and so executed a Bash shell with `/bin/bash`, wasn't put into an interactive
 > > state and finished, and then cleaned itself up with `--rm`.
@@ -151,7 +151,7 @@ First run a container while [exposing][docker-docs-run-expose-ports] the contain
 internal port `8888` with the `-p` flag
 
 ~~~
-docker run --rm -it -p 8888:8888 matthewfeickert/intro-to-docker:latest /bin/bash
+docker run --rm -ti -p 8888:8888 matthewfeickert/intro-to-docker:latest /bin/bash
 ~~~
 {: .source}
 

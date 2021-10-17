@@ -16,14 +16,14 @@ keypoints:
 So far everytime we've run the Docker containers we've typed
 
 ~~~
-docker run --rm -it <IMAGE>:<TAG> <command>
+docker run --rm -ti <IMAGE>:<TAG> <command>
 ~~~
 {: .source}
 
 like
 
 ~~~
-docker run --rm -it python:3.7 /bin/bash
+docker run --rm -ti python:3.7 /bin/bash
 ~~~
 {: .source}
 
@@ -42,7 +42,7 @@ SHELL=/bin/bash
 However, if no `/bin/bash` is given then you are placed inside the Python 3.7 REPL.
 
 ~~~
-docker run --rm -it python:3.7
+docker run --rm -ti python:3.7
 ~~~
 {: .source}
 
@@ -91,7 +91,7 @@ docker build -f Dockerfile.defaults -t defaults-example:latest --compress .
 Now running
 
 ~~~
-docker run --rm -it defaults-example:latest
+docker run --rm -ti defaults-example:latest
 ~~~
 {: .source}
 
@@ -99,7 +99,7 @@ again drops you into a Bash shell as specified by `CMD`.
 As has already been seen, `CMD` can be overridden by giving a command after the image
 
 ~~~
-docker run --rm -it defaults-example:latest python3
+docker run --rm -ti defaults-example:latest python3
 ~~~
 {: .source}
 
@@ -161,7 +161,7 @@ docker build -f Dockerfile.defaults -t defaults-example:latest --compress .
 So now
 
 ~~~
-docker run --rm -it defaults-example:latest
+docker run --rm -ti defaults-example:latest
 ~~~
 {: .source}
 
@@ -176,7 +176,7 @@ docker@2a99ffabb512:~/data$
 >
 > What will be the output of
 >~~~
->docker run --rm -it defaults-example:latest $USER
+>docker run --rm -ti defaults-example:latest $USER
 >~~~
 >{: .source}
 > and why?
