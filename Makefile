@@ -162,6 +162,7 @@ commands :
 	@sed -n -e '/^##/s|^##[[:space:]]*||p' $(MAKEFILE_LIST)
 
 image:
+	docker pull python:3.9-bullseye
 	docker build . \
 		-f docker/Dockerfile \
 		-t matthewfeickert/intro-to-docker:debug-local
