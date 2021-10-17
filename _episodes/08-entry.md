@@ -23,7 +23,7 @@ docker run --rm -ti <IMAGE>:<TAG> <command>
 like
 
 ~~~
-docker run --rm -ti python:3.7 /bin/bash
+docker run --rm -ti python:3.9 /bin/bash
 ~~~
 {: .source}
 
@@ -39,16 +39,16 @@ SHELL=/bin/bash
 ~~~
 {: .output}
 
-However, if no `/bin/bash` is given then you are placed inside the Python 3.7 REPL.
+However, if no `/bin/bash` is given then you are placed inside the Python 3.9 REPL.
 
 ~~~
-docker run --rm -ti python:3.7
+docker run --rm -ti python:3.9
 ~~~
 {: .source}
 
 ~~~
-Python 3.7.4 (default, Jul 13 2019, 14:04:11)
-[GCC 8.3.0] on linux
+Python 3.9.7 (default, Oct 13 2021, 09:00:49)
+[GCC 10.2.1 20210110] on linux
 Type "help", "copyright", "credits" or "license" for more information.
 >>>
 ~~~
@@ -56,25 +56,29 @@ Type "help", "copyright", "credits" or "license" for more information.
 
 These are very different behaviors, so let's understand what is happening.
 
-The Python 3.7 Docker image has a default command that runs when the container is executed,
+The Python 3.9 Docker image has a default command that runs when the container is executed,
 which is specified in the Dockerfile with [`CMD`][docker-docs-CMD].
 
 ~~~
 # Dockerfile.defaults
 # Make the base image configurable
-ARG BASE_IMAGE=python:3.7
+ARG BASE_IMAGE=python:3.9-bullseye
 FROM ${BASE_IMAGE}
+
 USER root
+
 RUN apt-get -qq -y update && \
     apt-get -qq -y upgrade && \
     apt-get -y autoclean && \
     apt-get -y autoremove && \
     rm -rf /var/lib/apt/lists/*
+
 # Create user "docker"
 RUN useradd -m docker && \
     cp /root/.bashrc /home/docker/ && \
     mkdir /home/docker/data && \
     chown -R --from=root docker /home/docker
+
 ENV HOME /home/docker
 WORKDIR ${HOME}/data
 USER docker
@@ -99,7 +103,7 @@ again drops you into a Bash shell as specified by `CMD`.
 As has already been seen, `CMD` can be overridden by giving a command after the image
 
 ~~~
-docker run --rm -ti defaults-example:latest python3
+docker run --rm -ti defaults-example:latest python
 ~~~
 {: .source}
 
@@ -130,19 +134,23 @@ main "$@"
 ~~~
 # Dockerfile.defaults
 # Make the base image configurable
-ARG BASE_IMAGE=python:3.7
+ARG BASE_IMAGE=python:3.9-bullseye
 FROM ${BASE_IMAGE}
+
 USER root
+
 RUN apt-get -qq -y update && \
     apt-get -qq -y upgrade && \
     apt-get -y autoclean && \
     apt-get -y autoremove && \
     rm -rf /var/lib/apt/lists/*
+
 # Create user "docker"
 RUN useradd -m docker && \
     cp /root/.bashrc /home/docker/ && \
     mkdir /home/docker/data && \
     chown -R --from=root docker /home/docker
+
 ENV HOME /home/docker
 WORKDIR ${HOME}/data
 USER docker
