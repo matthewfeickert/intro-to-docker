@@ -22,6 +22,7 @@ RUN python -m pip --no-cache-dir install --upgrade pip setuptools wheel && \
     python -m pip --no-cache-dir install --quiet \
      scipy~=1.7.1 \
      matplotlib~=3.4.3 \
+     "hist[plot]"~=2.5.1 \
      jupyter~=1.0.0 \
      jupyterlab~=3.2.0
 
