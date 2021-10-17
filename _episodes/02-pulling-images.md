@@ -52,8 +52,8 @@ docker images matthewfeickert/intro-to-docker
 {: .source}
 
 ~~~
-REPOSITORY                        TAG                 IMAGE ID            CREATED             SIZE
-matthewfeickert/intro-to-docker   latest              f4279e4a8ab0        26 hours ago        1.45GB
+REPOSITORY                        TAG          IMAGE ID        CREATED        SIZE
+matthewfeickert/intro-to-docker   latest       9602bb3f01a4    11 hours ago   1.54GB
 ~~~
 {: .output}
 
@@ -65,38 +65,38 @@ docker images --filter=reference="matthewfeickert/intro-to-docker"
 {: .source}
 
 ~~~
-REPOSITORY                        TAG                 IMAGE ID            CREATED             SIZE
-matthewfeickert/intro-to-docker   latest              f4279e4a8ab0        26 hours ago        1.45GB
+REPOSITORY                        TAG          IMAGE ID        CREATED        SIZE
+matthewfeickert/intro-to-docker   latest       9602bb3f01a4    11 hours ago   1.54GB
 ~~~
 {: .output}
 
 You can see here that there is the `TAG` field associated with the
 `matthewfeickert/intro-to-docker` image.
 Tags are way of further specifying different versions of the same image.
-As an example, let's pull the buster release tag of the
+As an example, let's pull the `bullseye` release tag of the
 [Debian image](https://hub.docker.com/_/debian).
 
 ~~~
-docker pull debian:buster
+docker pull debian:bullseye
 docker images debian
 ~~~
 {: .source}
 
 ~~~
-buster: Pulling from library/debian
+bullseye: Pulling from library/debian
 <some numbers>: Pull complete
 Digest: sha256:<the relevant SHA hash>
-Status: Downloaded newer image for debian:buster
-docker.io/library/debian:buster
+Status: Downloaded newer image for debian:bullseye
+docker.io/library/debian:bullseye
 
-REPOSITORY          TAG                 IMAGE ID            CREATED             SIZE
-debian              buster              ee11c54e6bb7        3 weeks ago         114MB
+REPOSITORY   TAG        IMAGE ID       CREATED        SIZE
+debian       bullseye   f776cfb21b5e   5 days ago     124MB
 ~~~
 {: .output}
 
 Additionally, there might be times where the _same_ image has different tags.
 For example, we can pull the `bootcamp-2021` tag of the `matthewfeickert/intro-to-docker`
-image, but when we inspect it we wee that it is the **same** image as the one we already pulled.
+image, but when we inspect it we see that it is the **same** image as the one we already pulled.
 
 ~~~
 docker pull matthewfeickert/intro-to-docker:bootcamp-2021
@@ -105,30 +105,30 @@ docker images matthewfeickert/intro-to-docker
 {: .source}
 
 ~~~
-REPOSITORY                        TAG                 IMAGE ID            CREATED             SIZE
-matthewfeickert/intro-to-docker   bootcamp-2021       f4279e4a8ab0        26 hours ago        1.45GB
-matthewfeickert/intro-to-docker   latest              f4279e4a8ab0        26 hours ago        1.45GB
+REPOSITORY                        TAG             IMAGE ID       CREATED        SIZE
+matthewfeickert/intro-to-docker   bootcamp-2021   64708e04f3a9   11 hours ago   1.57GB
+matthewfeickert/intro-to-docker   latest          64708e04f3a9   11 hours ago   1.57GB
 ~~~
 {: .output}
 
 > ## Pulling Python
 >
-> Pull the image for Python 3.8 and then list all `python` images along with
+> Pull the image for Python 3.9 and then list all `python` images along with
 > the `matthewfeickert/intro-to-docker` image
 >
 > > ## Solution
 > >
 > > ~~~
-> > docker pull python:3.8
+> > docker pull python:3.9
 > > docker images --filter=reference="matthewfeickert/intro-to-docker" --filter=reference="python"
 > > ~~~
 > > {: .source}
 > >
 > > ~~~
-> > REPOSITORY                        TAG                 IMAGE ID            CREATED             SIZE
-> > python                            3.8                 79cc46abd78d        2 weeks ago         882MB
-> > matthewfeickert/intro-to-docker   bootcamp-2021       f4279e4a8ab0        26 hours ago        1.45GB
-> > matthewfeickert/intro-to-docker   latest              f4279e4a8ab0        26 hours ago        1.45GB
+> > REPOSITORY                        TAG                 IMAGE ID       CREATED         SIZE
+> > matthewfeickert/intro-to-docker   bootcamp-2021       64708e04f3a9   11 hours ago    1.57GB
+> > matthewfeickert/intro-to-docker   latest              64708e04f3a9   11 hours ago    1.57GB
+> > python                            3.9                 e2d7fd224b9c   4 days ago      912MB
 > > ~~~
 > > {: .output}
 > {: .solution}
