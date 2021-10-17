@@ -60,4 +60,8 @@ ENV PATH /home/docker/.local/bin:$PATH
 # Avoid first use of sudo warning. c.f. https://askubuntu.com/a/22614/781671
 RUN touch $HOME/.sudo_as_admin_successful
 
+RUN mkdir -p examples && \
+    pushd examples && \
+    curl -sLO https://raw.githubusercontent.com/scikit-hep/hist/main/docs/examples/HistDemo.ipynb
+
 CMD [ "/bin/bash" ]
